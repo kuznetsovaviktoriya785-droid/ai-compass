@@ -1,0 +1,2132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+      background-color: #050914;
+      color: #F7F8FC;
+      font-family: "Satoshi", "Manrope", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  }
+  
+
+
+@layer utilities {
+  .text-gradient {
+    background-image: linear-gradient(
+      to right,
+      theme('colors.brand.blue'),
+      theme('colors.brand.sky')
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-gold {
+    background-image: linear-gradient(
+      to right,
+      theme('colors.brand.gold'),
+      theme('colors.brand.sky')
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background-color: theme('colors.night.light / 60%');
+    backdrop-filter: blur(24px);
+  }
+
+  .glass-card {
+    border-radius: 1rem;
+    border: 1px solid theme('colors.brand.blue / 20%');
+    background-color: theme('colors.night.light / 50%');
+    box-shadow: theme('boxShadow.card');
+    backdrop-filter: blur(24px);
+  }
+
+  .btn-glow {
+    box-shadow:
+      0 0 20px rgba(22, 139, 255, 0.35),
+      0 4px 16px rgba(22, 139, 255, 0.2);
+  }
+
+  .btn-glow:hover {
+    box-shadow:
+      0 0 32px rgba(22, 139, 255, 0.5),
+      0 6px 24px rgba(22, 139, 255, 0.3);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  .hero-enter {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .hero-enter-1 {
+    animation-delay: 0.1s;
+  }
+
+  .hero-enter-2 {
+    animation-delay: 0.25s;
+  }
+
+  .hero-enter-3 {
+    animation-delay: 0.4s;
+  }
+
+  .hero-enter-4 {
+    animation-delay: 0.55s;
+  }
+
+  .hero-enter-5 {
+    animation-delay: 0.7s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-enter {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}.hero-nebula {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(120px);
+  will-change: transform, opacity;
+  animation: heroNebulaDrift 15s ease-in-out infinite alternate;
+}
+
+.hero-nebula-left {
+  width: 480px;
+  height: 480px;
+  top: 4%;
+  left: -190px;
+  background: rgba(37, 99, 235, 0.18);
+}
+
+.hero-nebula-right {
+  width: 620px;
+  height: 620px;
+  top: -8%;
+  right: -240px;
+  background: rgba(14, 165, 233, 0.14);
+  animation-delay: -5s;
+}
+
+.hero-nebula-bottom {
+  width: 760px;
+  height: 430px;
+  left: 24%;
+  bottom: -280px;
+  background: rgba(79, 70, 229, 0.15);
+  animation-delay: -9s;
+}
+
+.hero-nebula-gold {
+  width: 320px;
+  height: 320px;
+  top: 20%;
+  right: 25%;
+  background: rgba(217, 181, 109, 0.07);
+  animation-delay: -12s;
+}
+
+.hero-star-field {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  background-image:
+    radial-gradient(circle at 12% 18%, #ffffff 0 1px, transparent 1.3px),
+    radial-gradient(circle at 28% 62%, #65c7ff 0 1px, transparent 1.4px),
+    radial-gradient(circle at 48% 25%, #ffffff 0 1px, transparent 1.3px),
+    radial-gradient(circle at 67% 74%, #d9b56d 0 1px, transparent 1.4px),
+    radial-gradient(circle at 88% 34%, #ffffff 0 1px, transparent 1.3px);
+  background-size:
+    150px 150px,
+    210px 210px,
+    260px 260px,
+    310px 310px,
+    380px 380px;
+  animation: heroStarFieldMove 34s linear infinite;
+}
+
+.hero-star {
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 12px rgba(101, 199, 255, 0.55);
+  animation-name: heroStarTwinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.hero-neural-network {
+  opacity: 0.32;
+  animation: heroNetworkFloat 18s ease-in-out infinite alternate;
+}
+
+.hero-orbits {
+  opacity: 0.28;
+}
+
+.hero-orbit {
+  animation: heroOrbitFlow 22s linear infinite;
+}
+
+.hero-orbit-gold {
+  animation-delay: -8s;
+}
+
+.hero-light-ray {
+  position: absolute;
+  width: 520px;
+  height: 1px;
+  transform-origin: left center;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+.hero-light-ray-one {
+  top: 25%;
+  left: 35%;
+  transform: rotate(-18deg);
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(101, 199, 255, 0.18),
+    transparent
+  );
+  animation: heroLightRayPulse 8s ease-in-out infinite;
+}
+
+.hero-light-ray-two {
+  top: 66%;
+  left: 48%;
+  transform: rotate(12deg);
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(217, 181, 109, 0.12),
+    transparent
+  );
+  animation: heroLightRayPulse 10s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+@keyframes heroNebulaDrift {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(0.96);
+    opacity: 0.42;
+  }
+
+  100% {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+    opacity: 0.78;
+  }
+}
+
+@keyframes heroStarFieldMove {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-36px, 24px, 0);
+  }
+}
+
+@keyframes heroStarTwinkle {
+  0%,
+  100% {
+    transform: scale(0.7);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.45);
+    opacity: 1;
+  }
+}
+
+@keyframes heroNetworkFloat {
+  from {
+    transform: translate3d(0, -5px, 0);
+    opacity: 0.2;
+  }
+
+  to {
+    transform: translate3d(0, 12px, 0);
+    opacity: 0.4;
+  }
+}
+
+@keyframes heroOrbitFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -220;
+  }
+}
+
+@keyframes heroLightRayPulse {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translateX(-25px) rotate(-18deg);
+  }
+
+  50% {
+    opacity: 0.65;
+    transform: translateX(35px) rotate(-18deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-nebula,
+  .hero-star-field,
+  .hero-star,
+  .hero-neural-network,
+  .hero-orbit,
+  .hero-light-ray {
+    animation: none !important;
+  }
+}/* ===== Премиальный живой компас AI Compass ===== */
+
+
+.hero-compass-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(170, 220, 255, 0.18) 18%,
+      rgba(90, 165, 240, 0.1) 40%,
+      rgba(45, 120, 210, 0.04) 58%,
+      transparent 74%
+    );
+  filter: blur(46px);
+  opacity: 0.58;
+  animation: compassGlowBreath 28s ease-in-out infinite;
+  transform: scale(0.98);
+}
+
+.hero-compass {
+  isolation: isolate;
+  border-radius: 9999px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hero-compass-disc {
+  border: 0.4px solid rgba(196, 165, 116, 0.22);
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(190, 220, 250, 0.05),
+      rgba(5, 10, 18, 0.08) 55%,
+      rgba(2, 6, 14, 0.14) 100%
+    );
+  box-shadow:
+    inset 0 0 28px rgba(120, 170, 220, 0.06),
+    inset 0 0 20px rgba(196, 165, 116, 0.04);
+  backdrop-filter: blur(1.5px);
+  opacity: 0.55;
+}
+
+.hero-orbit {
+  border-radius: 9999px;
+  border: 0.55px solid rgba(232, 210, 168, 0.52);
+  box-shadow: 0 0 6px rgba(224, 200, 148, 0.12);
+  transform-origin: center;
+  background: transparent;
+}
+
+.hero-orbit::before,
+.hero-orbit::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  background: #e8d4a0;
+  box-shadow:
+    0 0 5px rgba(232, 210, 160, 0.55),
+    0 0 12px rgba(196, 165, 116, 0.28);
+}
+
+.hero-orbit::before {
+  width: 1.55px;
+  height: 1.55px;
+  top: -0.75px;
+  left: 50%;
+}
+
+.hero-orbit::after {
+  width: 1.35px;
+  height: 1.35px;
+  right: -0.65px;
+  top: 50%;
+  background: #d4b888;
+  box-shadow:
+    0 0 5px rgba(212, 184, 136, 0.48),
+    0 0 10px rgba(196, 165, 116, 0.22);
+}
+
+/* Outer — delicate dotted orbit */
+.hero-orbit-one,
+.hero-orbit-dotted {
+  animation: compassOrbitClockwise 130s linear infinite;
+  border-style: dotted;
+  border-width: 0.65px;
+  border-color: rgba(232, 210, 168, 0.5);
+}
+
+.hero-orbit-dotted::before,
+.hero-orbit-dotted::after {
+  opacity: 0.75;
+}
+
+/* Middle — golden orbit */
+.hero-orbit-two,
+.hero-orbit-gold-ring {
+  animation: compassOrbitCounterClockwise 155s linear infinite;
+  border-style: solid;
+  border-width: 0.55px;
+  border-color: rgba(238, 214, 168, 0.55);
+  box-shadow: 0 0 7px rgba(224, 200, 148, 0.14);
+}
+
+/* Inner — finest solid hairline */
+.hero-orbit-three {
+  animation: compassOrbitClockwise 140s linear infinite;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: rgba(232, 210, 168, 0.48);
+}
+
+.hero-compass-mark {
+  position: absolute;
+  font-family: "Satoshi", "Manrope", system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.48em;
+  color: #E8D4A0;
+  text-transform: uppercase;
+  line-height: 1;
+  opacity: 1;
+  text-shadow:
+    0 0 10px rgba(0, 0, 0, 0.55),
+    0 0 1px rgba(0, 0, 0, 0.8);
+}
+
+.hero-compass-mark-n { top: 1.15rem; left: 50%; transform: translateX(-50%); }
+.hero-compass-mark-s { bottom: 1.15rem; left: 50%; transform: translateX(-50%); color: rgba(224, 200, 148, 0.88); }
+.hero-compass-mark-e { right: 1.15rem; top: 50%; transform: translateY(-50%); color: rgba(232, 210, 160, 0.95); }
+.hero-compass-mark-w { left: 1.15rem; top: 50%; transform: translateY(-50%); color: rgba(224, 200, 148, 0.88); }
+
+.hero-crystal-wrap {
+  position: relative;
+  animation: none;
+}
+
+.hero-crystal-wrap::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 160px;
+  height: 210px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(200, 230, 255, 0.32) 0%,
+    rgba(110, 180, 245, 0.16) 32%,
+    rgba(50, 130, 220, 0.06) 55%,
+    transparent 74%
+  );
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-crystal-float {
+  animation: crystalFloat 16s ease-in-out infinite;
+}
+
+.hero-crystal-rotate {
+  animation: heroCrystalSlowRotate 105s linear infinite;
+}
+
+.hero-crystal {
+  position: relative;
+  filter:
+    drop-shadow(0 14px 18px rgba(0, 0, 0, 0.36))
+    drop-shadow(0 0 7px rgba(220, 242, 255, 0.72))
+    drop-shadow(0 0 18px rgba(130, 200, 255, 0.52))
+    drop-shadow(0 0 36px rgba(70, 150, 240, 0.28))
+    drop-shadow(0 0 58px rgba(40, 120, 215, 0.14))
+    brightness(1.36)
+    contrast(1.1)
+    saturate(1.1);
+}
+
+.hero-crystal-warm-core {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  z-index: 2;
+  width: 48px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(200, 232, 255, 0.62) 20%,
+    rgba(120, 190, 250, 0.34) 44%,
+    rgba(55, 135, 225, 0.12) 68%,
+    transparent 100%
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(1.25px);
+}
+
+.hero-crystal::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 170px;
+  height: 220px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(170, 220, 255, 0.4) 14%,
+    rgba(90, 170, 245, 0.22) 34%,
+    rgba(45, 125, 220, 0.1) 54%,
+    transparent 74%
+  );
+  filter: blur(24px);
+  animation: crystalInnerGlow 18s ease-in-out infinite;
+  z-index: -1;
+}
+
+.hero-crystal::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -22px;
+  width: 58px;
+  height: 10px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.42);
+  filter: blur(8px);
+  animation: crystalShadow 16s ease-in-out infinite;
+  z-index: -1;
+  opacity: 0.55;
+}
+
+.hero-crystal svg {
+  overflow: visible;
+  animation: crystalLightSweep 18s ease-in-out infinite;
+}
+
+.hero-compass-particle {
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: #d4b888;
+  box-shadow:
+    0 0 5px rgba(212, 184, 136, 0.55),
+    0 0 10px rgba(196, 165, 116, 0.28);
+  animation: compassParticleFloat 12s ease-in-out infinite;
+}
+
+.hero-compass-particle:nth-of-type(2) {
+  animation-delay: -1.5s;
+  background: #b89a72;
+  box-shadow:
+    0 0 5px rgba(184, 154, 114, 0.48),
+    0 0 10px rgba(196, 165, 116, 0.24);
+}
+
+.hero-compass-particle:nth-of-type(3) {
+  animation-delay: -3s;
+}
+
+@keyframes compassGlowBreath {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.64;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes compassOrbitClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes compassOrbitCounterClockwise {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes crystalFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.35deg) scale(1);
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(0.4deg) scale(1.018);
+  }
+}
+
+@keyframes crystalInnerGlow {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes crystalShadow {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: translateX(-50%) scaleX(0.88);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleX(1.05);
+  }
+}
+
+@keyframes crystalLightSweep {
+  0%,
+  100% {
+    filter: brightness(1.14) saturate(1.1) contrast(1.07);
+  }
+
+  50% {
+    filter: brightness(1.26) saturate(1.16) contrast(1.1);
+  }
+}
+
+@keyframes compassParticleFloat {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translate3d(0, 4px, 0) scale(0.85);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: translate3d(4px, -8px, 0) scale(1.1);
+  }
+}
+
+@keyframes heroCrystalSlowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes heroCrystalPulseRing {
+  0%,
+  100% {
+    filter: none;
+  }
+
+  50% {
+    filter: drop-shadow(0 0 10px rgba(232, 212, 176, 0.08));
+  }
+}
+
+/* AI-орбиты Hero-компаса */
+.hero-compass-scene {
+  perspective: 900px;
+}
+
+.hero-compass-scene-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-out;
+}
+
+.hero-ai-orbit {
+  pointer-events: none;
+}
+
+.hero-ai-orbit-far {
+  opacity: 0.62;
+  z-index: 1;
+}
+
+.hero-ai-orbit-mid {
+  opacity: 0.8;
+  z-index: 2;
+}
+
+.hero-ai-orbit-near {
+  opacity: 0.92;
+  z-index: 3;
+}
+
+.hero-ai-orbit-stroke {
+  fill: none;
+  stroke: rgba(232, 210, 168, 0.46);
+  stroke-width: 0.58;
+  filter: drop-shadow(0 0 2px rgba(224, 200, 148, 0.22));
+  animation: heroAiOrbitPulse 32s ease-in-out infinite;
+}
+
+.hero-ai-orbit-spinner {
+  position: absolute;
+  inset: 0;
+  animation: compassOrbitClockwise 220s linear infinite;
+}
+
+.hero-ai-orbit-spinner-reverse {
+  animation-name: compassOrbitCounterClockwise;
+}
+
+.hero-ai-orbit-spinner-inner {
+  width: 100%;
+  height: 100%;
+  transform: scaleY(var(--orbit-scale-y, 1));
+  transform-origin: center center;
+}
+
+.hero-ai-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-left: 0;
+  margin-top: 0;
+  transform-origin: center center;
+}
+
+.hero-ai-node-dot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: #e0c894;
+  box-shadow:
+    0 0 5px rgba(224, 200, 148, 0.65),
+    0 0 12px rgba(196, 165, 116, 0.35),
+    0 0 20px rgba(180, 150, 100, 0.15);
+}
+
+.hero-ai-node-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.035em;
+  color: rgba(255, 236, 205, 0.96);
+  white-space: nowrap;
+  text-shadow:
+    0 0 14px rgba(0, 0, 0, 0.8),
+    0 1px 4px rgba(0, 0, 0, 0.6),
+    0 0 1px rgba(0, 0, 0, 0.9);
+}
+
+.hero-ai-orbit-far .hero-ai-node-dot {
+  width: 3.25px;
+  height: 3.25px;
+  opacity: 0.92;
+}
+
+.hero-ai-orbit-far .hero-ai-node-label {
+  font-size: 0.6875rem;
+  color: rgba(242, 222, 180, 0.9);
+}
+
+.hero-ai-orbit-near .hero-ai-node-dot {
+  width: 4.75px;
+  height: 4.75px;
+}
+
+.hero-ai-orbit-near .hero-ai-node-label {
+  color: rgba(255, 242, 215, 1);
+}
+
+@keyframes heroAiOrbitPulse {
+  0%,
+  82%,
+  100% {
+    stroke: rgba(232, 210, 168, 0.42);
+  }
+
+  88% {
+    stroke: rgba(245, 224, 185, 0.68);
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-ai-orbit-spinner {
+    animation: none;
+  }
+
+  .hero-ai-node-label {
+    font-size: 0.5625rem;
+  }
+
+  .hero-crystal-rotate {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-compass-glow,
+  .hero-orbit,
+  .hero-crystal,
+  .hero-crystal-wrap,
+  .hero-crystal-float,
+  .hero-crystal-rotate,
+  .hero-crystal::before,
+  .hero-crystal::after,
+  .hero-crystal svg,
+  .hero-compass-particle,
+  .hero-ai-orbit-spinner,
+  .hero-ai-orbit-stroke,
+  .hero-compass-scene-inner {
+    animation: none !important;
+    transition: none !important;
+  }
+}/* ===== Премиальная левая часть Hero ===== */
+
+.hero-enter h1 {
+  position: relative;
+  max-width: 760px;
+  text-wrap: balance;
+  letter-spacing: -0.045em;
+  text-shadow:
+    0 2px 18px rgba(255, 255, 255, 0.06),
+    0 0 36px rgba(22, 139, 255, 0.08);
+}
+
+.hero-enter h1::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -6%;
+  top: 18%;
+  width: 72%;
+  height: 58%;
+  border-radius: 9999px;
+  background: rgba(22, 139, 255, 0.14);
+  filter: blur(54px);
+  opacity: 0.72;
+}
+
+.hero-enter p {
+  max-width: 680px;
+  line-height: 1.75;
+  color: rgba(229, 238, 255, 0.76);
+  text-wrap: pretty;
+}
+
+.hero-primary-button,
+.hero-secondary-button {
+  position: relative;
+  overflow: hidden;
+  min-height: 54px;
+  border-radius: 9999px;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+.hero-primary-button {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 42%),
+    linear-gradient(90deg, #168bff 0%, #38bdf8 55%, #65c7ff 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 12px 34px rgba(22, 139, 255, 0.34),
+    0 0 34px rgba(22, 139, 255, 0.2);
+}
+
+.hero-primary-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%);
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.34) 48%,
+    transparent 76%
+  );
+  transition: transform 650ms ease;
+}
+
+.hero-primary-button:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 18px 46px rgba(22, 139, 255, 0.45),
+    0 0 46px rgba(101, 199, 255, 0.28);
+}
+
+.hero-primary-button:hover::before {
+  transform: translateX(120%);
+}
+
+.hero-secondary-button {
+  border: 1px solid rgba(148, 197, 255, 0.2);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(6, 17, 38, 0.44);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.hero-secondary-button:hover {
+  transform: translateY(-3px);
+  border-color: rgba(101, 199, 255, 0.46);
+  background:
+    linear-gradient(180deg, rgba(101, 199, 255, 0.12), rgba(255, 255, 255, 0.03)),
+    rgba(6, 17, 38, 0.56);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    0 14px 36px rgba(22, 139, 255, 0.16);
+}
+
+.hero-enter-1 {
+  border-color: rgba(101, 199, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(101, 199, 255, 0.1), rgba(255, 255, 255, 0.025)),
+    rgba(6, 17, 38, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 28px rgba(22, 139, 255, 0.09);
+}
+
+.hero-enter-1::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(101, 199, 255, 0.1),
+    rgba(101, 199, 255, 0.5),
+    rgba(217, 181, 109, 0.22),
+    rgba(101, 199, 255, 0.1)
+  );
+  mask:
+  linear-gradient(#000 0 0) content-box,
+  linear-gradient(#000 0 0);
+mask-composite: exclude;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .hero-enter h1 {
+    letter-spacing: -0.035em;
+  }
+
+  .hero-enter p {
+    line-height: 1.65;
+  }
+
+  .hero-primary-button,
+  .hero-secondary-button {
+    min-height: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-primary-button,
+  .hero-secondary-button,
+  .hero-primary-button::before {
+    transition: none !important;
+  }
+}/* ===== Акцентный заголовок Hero ===== */
+
+.hero-title-gradient {
+  display: inline-block;
+  color: transparent;
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff 0%,
+      #b9e8ff 18%,
+      #65c7ff 48%,
+      #168bff 72%,
+      #d9b56d 100%
+    );
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 0 18px rgba(101, 199, 255, 0.2),
+    0 0 38px rgba(22, 139, 255, 0.14);
+  animation: heroTitleShimmer 7s ease-in-out infinite alternate;
+}
+
+@keyframes heroTitleShimmer {
+  from {
+    background-position: 0% 50%;
+    filter: brightness(0.95);
+  }
+
+  to {
+    background-position: 100% 50%;
+    filter: brightness(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-gradient {
+    animation: none !important;
+  }
+}
+
+/* ===== Continuous universe canvas (Hero + Why) ===== */
+
+.universe-canvas {
+  position: relative;
+  background:
+    /* Luminous core — Hero center only, gone before the lower quarter */
+    radial-gradient(
+      ellipse 64% 38% at 58% 18%,
+      rgba(26, 54, 100, 0.28) 0%,
+      rgba(10, 24, 50, 0.1) 38%,
+      transparent 68%
+    ),
+    /* Soft mid hush — no royal lift into the join */
+    radial-gradient(
+      ellipse 55% 30% at 54% 34%,
+      rgba(8, 18, 36, 0.1) 0%,
+      transparent 70%
+    ),
+    radial-gradient(1.2px 1.2px at 8% 6%, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 18% 14%, rgba(255, 255, 255, 0.12), transparent),
+    radial-gradient(1px 1px at 28% 4%, rgba(255, 240, 210, 0.1), transparent),
+    radial-gradient(1.2px 1.2px at 42% 10%, rgba(255, 255, 255, 0.16), transparent),
+    radial-gradient(1px 1px at 55% 3%, rgba(255, 255, 255, 0.08), transparent),
+    radial-gradient(1px 1px at 68% 12%, rgba(255, 230, 190, 0.12), transparent),
+    radial-gradient(1.2px 1.2px at 78% 5%, rgba(255, 255, 255, 0.18), transparent),
+    radial-gradient(1px 1px at 88% 16%, rgba(255, 255, 255, 0.1), transparent),
+    radial-gradient(1px 1px at 94% 8%, rgba(255, 255, 255, 0.14), transparent),
+    radial-gradient(1px 1px at 12% 48%, rgba(255, 255, 255, 0.1), transparent),
+    radial-gradient(1px 1px at 36% 52%, rgba(255, 255, 255, 0.08), transparent),
+    radial-gradient(1px 1px at 58% 46%, rgba(255, 240, 210, 0.06), transparent),
+    radial-gradient(1.2px 1.2px at 72% 56%, rgba(255, 255, 255, 0.1), transparent),
+    radial-gradient(1px 1px at 84% 50%, rgba(255, 255, 255, 0.06), transparent),
+    radial-gradient(1px 1px at 22% 62%, rgba(255, 255, 255, 0.08), transparent),
+    radial-gradient(1px 1px at 46% 68%, rgba(255, 255, 255, 0.06), transparent),
+    radial-gradient(1px 1px at 22% 88%, rgba(255, 255, 255, 0.1), transparent),
+    radial-gradient(1px 1px at 64% 92%, rgba(255, 240, 210, 0.06), transparent),
+    radial-gradient(1px 1px at 86% 84%, rgba(255, 255, 255, 0.08), transparent),
+    /* Longer, calmer descent into Section 2 navy, then soft hold through Journey */
+    linear-gradient(
+      180deg,
+      #050b1a 0%,
+      #06101f 6%,
+      #081628 14%,
+      #0a1a32 22%,
+      #071120 28%,
+      #060e1a 34%,
+      #050a16 40%,
+      #050914 48%,
+      #050914 62%,
+      #060c18 78%,
+      #050914 92%,
+      #050914 100%
+    );
+}
+
+/* ===== Why Compass Section ===== */
+
+.why-section {
+  position: relative;
+  min-height: 100svh;
+  background: transparent;
+  line-height: 0;
+  margin: -2px 0 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+}
+
+.why-section::before {
+  content: none;
+  display: none;
+}
+
+/* Soft atmospheric dissolve into Journey — continuous galaxy space */
+.why-section::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: min(42%, 360px);
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 90% 75% at 74% 88%,
+      rgba(80, 60, 110, 0.14) 0%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 110% 85% at 28% 100%,
+      rgba(18, 42, 88, 0.12) 0%,
+      transparent 76%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(5, 9, 20, 0.03) 42%,
+      rgba(5, 9, 20, 0.08) 72%,
+      transparent 100%
+    );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.65) 62%,
+    rgba(0, 0, 0, 0.28) 80%,
+    rgba(0, 0, 0, 0.06) 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.65) 62%,
+    rgba(0, 0, 0, 0.28) 80%,
+    rgba(0, 0, 0, 0.06) 92%,
+    transparent 100%
+  );
+}
+
+/* Approved artwork — soft dissolve into shared universe at both ends */
+.why-artwork-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  user-select: none;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.12) 2%,
+    rgba(0, 0, 0, 0.4) 6%,
+    rgba(0, 0, 0, 0.72) 11%,
+    rgba(0, 0, 0, 0.92) 17%,
+    #000 24%,
+    #000 58%,
+    rgba(0, 0, 0, 0.92) 68%,
+    rgba(0, 0, 0, 0.72) 76%,
+    rgba(0, 0, 0, 0.45) 84%,
+    rgba(0, 0, 0, 0.22) 90%,
+    rgba(0, 0, 0, 0.08) 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.12) 2%,
+    rgba(0, 0, 0, 0.4) 6%,
+    rgba(0, 0, 0, 0.72) 11%,
+    rgba(0, 0, 0, 0.92) 17%,
+    #000 24%,
+    #000 58%,
+    rgba(0, 0, 0, 0.92) 68%,
+    rgba(0, 0, 0, 0.72) 76%,
+    rgba(0, 0, 0, 0.45) 84%,
+    rgba(0, 0, 0, 0.22) 90%,
+    rgba(0, 0, 0, 0.08) 95%,
+    transparent 100%
+  );
+}
+
+/* ===== Cinematic Hero Scene ===== */
+
+.hero-scene {
+  position: relative;
+  min-height: 100svh;
+  height: 100svh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  overflow-x: clip;
+  overflow-y: visible;
+  background: transparent;
+  /* Dissolve into the shared canvas — no hard section floor */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 72%,
+    rgba(0, 0, 0, 0.88) 82%,
+    rgba(0, 0, 0, 0.5) 90%,
+    rgba(0, 0, 0, 0.18) 96%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 72%,
+    rgba(0, 0, 0, 0.88) 82%,
+    rgba(0, 0, 0, 0.5) 90%,
+    rgba(0, 0, 0, 0.18) 96%,
+    transparent 100%
+  );
+}
+
+.hero-scene-vignette {
+  background: radial-gradient(
+    ellipse at 50% 38%,
+    transparent 45%,
+    rgba(0, 0, 0, 0.12) 78%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+}
+
+.hero-scene-nebula {
+  background:
+    radial-gradient(
+      ellipse 72% 55% at 28% 42%,
+      rgba(70, 120, 185, 0.07) 0%,
+      rgba(40, 80, 140, 0.03) 42%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 58% 48% at 72% 38%,
+      rgba(90, 150, 210, 0.08) 0%,
+      rgba(50, 100, 170, 0.035) 45%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 18% 28%,
+      rgba(60, 55, 80, 0.025) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 48% 32% at 84% 24%,
+      rgba(90, 75, 55, 0.02) 0%,
+      transparent 68%
+    );
+  opacity: 0.9;
+  filter: blur(28px);
+}
+
+.hero-scene-starfield-canvas {
+  opacity: 1;
+  animation: heroStarParallaxFar 200s linear infinite;
+}
+
+.hero-scene-starfield-parallax {
+  background-image:
+    radial-gradient(1px 1px at 18% 22%, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 72% 38%, rgba(255, 230, 190, 0.16), transparent),
+    radial-gradient(1px 1px at 44% 68%, rgba(255, 255, 255, 0.14), transparent),
+    radial-gradient(1px 1px at 88% 14%, rgba(255, 255, 255, 0.12), transparent),
+    radial-gradient(1px 1px at 8% 78%, rgba(196, 165, 116, 0.14), transparent);
+  opacity: 0.45;
+  animation: heroStarParallaxNear 140s linear infinite;
+}
+
+.hero-scene-haze,
+.hero-scene-fade {
+  display: none;
+}
+
+.hero-scene-stage {
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  padding: 5.5rem clamp(1.25rem, 4vw, 3rem) 2rem;
+}
+
+.hero-scene-compass {
+  flex: 0 1 42%;
+  width: 42%;
+  max-width: 520px;
+  opacity: 0;
+  margin: 0;
+  transform: none;
+  transform-origin: center center;
+  animation: heroSceneFadeIn 1.6s ease-out 1s forwards;
+}
+
+.hero-scene-compass .hero-compass-scene {
+  margin: 0 auto;
+}
+
+.hero-scene-particles {
+  z-index: 1;
+  opacity: 0;
+  animation: heroSceneFadeIn 1.8s ease-out 3s forwards;
+}
+
+.hero-scene-particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: #f0d48a;
+  box-shadow: 0 0 4px rgba(232, 197, 106, 0.34);
+  animation-name: heroSceneParticleFloat;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.hero-scene-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex: 0 1 45%;
+  width: 45%;
+  max-width: 520px;
+  margin: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  font-family: "Satoshi", "Manrope", system-ui, sans-serif;
+}
+
+.hero-scene-title {
+  margin: 0;
+  font-family: "Satoshi", "Manrope", system-ui, sans-serif;
+  font-size: clamp(2.73rem, 5.41vw, 4.62rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.14;
+  color: #FFFEFA;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFFCF6 42%,
+    #F4EFE6 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter:
+    drop-shadow(0 0 12px rgba(255, 252, 245, 0.42))
+    drop-shadow(0 0 26px rgba(240, 248, 255, 0.18))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  opacity: 0;
+  animation: heroSceneFadeUp 1.6s ease-out 4s forwards;
+}
+
+.hero-scene-subtitle {
+  margin: 1.55rem 0 0;
+  max-width: 28rem;
+  font-family: "Satoshi", "Manrope", system-ui, sans-serif;
+  font-size: clamp(1.01rem, 1.6vw, 1.16rem);
+  font-weight: 400;
+  line-height: 1.88;
+  letter-spacing: 0.025em;
+  color: #C9D0DB;
+  opacity: 0;
+  animation: heroSceneFadeUp 1.6s ease-out 5s forwards;
+}
+
+.hero-scene-button {
+  position: relative;
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 9999px;
+  border: 1px solid rgba(210, 175, 115, 0.85);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(214, 182, 128, 0.28) 0%,
+      rgba(168, 136, 88, 0.18) 45%,
+      rgba(120, 95, 58, 0.14) 100%
+    );
+  padding: 0.92rem 2.15rem;
+  font-family: "Satoshi", "Manrope", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #F5F2EB;
+  text-decoration: none;
+  box-shadow:
+    0 1px 0 rgba(255, 244, 220, 0.22) inset,
+    0 -1px 0 rgba(80, 60, 30, 0.2) inset,
+    0 10px 32px rgba(0, 0, 0, 0.32);
+  opacity: 0;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.7s ease,
+    border-color 0.7s ease;
+  animation: heroSceneFadeIn 1.6s ease-out 6s forwards;
+}
+
+.hero-scene-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 240, 210, 0.18) 48%,
+    rgba(255, 248, 230, 0.08) 52%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-scene-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(232, 197, 106, 0.85);
+  box-shadow:
+    0 1px 0 rgba(255, 245, 220, 0.18) inset,
+    0 12px 36px rgba(0, 0, 0, 0.32),
+    0 0 24px rgba(196, 165, 116, 0.12);
+}
+
+.hero-scene-button:hover::before {
+  transform: translateX(120%);
+}
+
+@keyframes heroSceneFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes heroSceneFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroSceneParticleFloat {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, -100vh, 0);
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-scene-stage {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 5rem 1.25rem 1.75rem;
+  }
+
+  .hero-scene-content {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 34rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-scene-compass {
+    flex: 0 0 auto;
+    width: min(78%, 360px);
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-scene-button {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero-scene-stage {
+    padding: 4.75rem 1rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .hero-scene-compass {
+    width: min(86%, 300px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene-compass,
+  .hero-scene-particles,
+  .hero-scene-title,
+  .hero-scene-subtitle,
+  .hero-scene-button,
+  .hero-scene-particle,
+  .hero-scene-starfield-canvas,
+  .hero-scene-starfield-parallax {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .hero-scene-compass {
+    transform: none !important;
+  }
+
+  .hero-scene-title,
+  .hero-scene-subtitle,
+  .hero-scene-button,
+  .hero-scene-particle,
+  .hero-scene-starfield-canvas,
+  .hero-scene-starfield-parallax {
+    transform: none !important;
+  }
+
+  .hero-scene-cursor {
+    display: none;
+  }
+}
+
+/* ===== Journey Map — cosmic route inside the shared universe ===== */
+
+/* Heading — same soft white glow language as Hero */
+.journey-title {
+  color: #FFFEFA;
+  text-shadow: none;
+  filter:
+    drop-shadow(0 0 12px rgba(255, 252, 245, 0.36))
+    drop-shadow(0 0 26px rgba(240, 248, 255, 0.14))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.journey-title .text-gradient {
+  filter:
+    drop-shadow(0 0 10px rgba(160, 210, 255, 0.22))
+    drop-shadow(0 0 22px rgba(100, 170, 240, 0.1));
+}
+
+.journey-section {
+  position: relative;
+  background: transparent;
+  margin: -min(14vh, 120px) 0 0;
+  padding-top: calc(5rem + min(14vh, 120px));
+  border: 0;
+  box-shadow: none;
+}
+
+@media (min-width: 640px) {
+  .journey-section {
+    padding-top: calc(7rem + min(14vh, 120px));
+  }
+}
+
+/* Galaxy dissolve from Section 2 — never a hard band or rectangle */
+.journey-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: min(62vh, 560px);
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 86% 70% at 76% -8%,
+      rgba(88, 68, 118, 0.09) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 98% 72% at 32% -4%,
+      rgba(28, 62, 120, 0.08) 0%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 120% 58% at 50% 6%,
+      rgba(14, 36, 78, 0.05) 0%,
+      transparent 78%
+    );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 8%,
+    rgba(0, 0, 0, 0.55) 18%,
+    rgba(0, 0, 0, 0.85) 32%,
+    #000 48%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 8%,
+    rgba(0, 0, 0, 0.55) 18%,
+    rgba(0, 0, 0, 0.85) 32%,
+    #000 48%,
+    #000 100%
+  );
+}
+
+.journey-atmosphere {
+  z-index: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 4%,
+    rgba(0, 0, 0, 0.35) 10%,
+    rgba(0, 0, 0, 0.7) 18%,
+    #000 28%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 4%,
+    rgba(0, 0, 0, 0.35) 10%,
+    rgba(0, 0, 0, 0.7) 18%,
+    #000 28%,
+    #000 100%
+  );
+}
+
+/* Distant nebula — scattered depth, never a flat blue field */
+.journey-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 58% 44% at 16% 26%,
+      rgba(48, 92, 158, 0.07) 0%,
+      rgba(24, 52, 108, 0.03) 48%,
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 52% 40% at 86% 32%,
+      rgba(64, 112, 178, 0.065) 0%,
+      rgba(32, 68, 128, 0.025) 50%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 46% 34% at 62% 72%,
+      rgba(40, 78, 140, 0.05) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 10% 68%,
+      rgba(62, 52, 88, 0.045) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 36% 26% at 74% 14%,
+      rgba(86, 68, 52, 0.028) 0%,
+      transparent 72%
+    );
+  filter: blur(38px);
+  opacity: 0.95;
+}
+
+.journey-haze {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Far depth — deep navy wells, cinematic volume */
+.journey-haze-far {
+  background:
+    radial-gradient(
+      ellipse 120% 62% at 50% -10%,
+      rgba(8, 18, 42, 0.48) 0%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 70% 54% at 3% 36%,
+      rgba(10, 24, 52, 0.36) 0%,
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 68% 50% at 97% 40%,
+      rgba(14, 30, 60, 0.32) 0%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 56% 40% at 78% 10%,
+      rgba(52, 42, 78, 0.12) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 48% 36% at 18% 78%,
+      rgba(12, 28, 58, 0.26) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 105% 55% at 50% 112%,
+      rgba(4, 10, 26, 0.42) 0%,
+      transparent 76%
+    );
+  filter: blur(60px);
+}
+
+/* Soft blue nebula — sparse luminous clouds, not a blue strip */
+.journey-haze-near {
+  background:
+    radial-gradient(
+      ellipse 55% 42% at 28% 38%,
+      rgba(46, 110, 200, 0.055) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 50% 38% at 74% 48%,
+      rgba(70, 140, 210, 0.05) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 64% 36% at 50% 58%,
+      rgba(40, 100, 180, 0.04) 0%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 42% 30% at 58% 28%,
+      rgba(90, 155, 215, 0.035) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 48% 32% at 40% 78%,
+      rgba(36, 88, 160, 0.04) 0%,
+      transparent 72%
+    );
+  filter: blur(72px);
+}
+
+/* Real starfield — same depth language as the hero sky */
+.journey-starfield {
+  opacity: 1;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.5) 9%,
+    #000 20%,
+    #000 88%,
+    rgba(0, 0, 0, 0.5) 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.5) 9%,
+    #000 20%,
+    #000 88%,
+    rgba(0, 0, 0, 0.5) 97%,
+    transparent 100%
+  );
+}
+
+/* Faint near-field dust drifting over the canvas stars */
+.journey-dust {
+  position: absolute;
+  inset: 0;
+  opacity: 0.42;
+  /* Far micro dust (small tile) */
+  background-image:
+    radial-gradient(0.8px 0.8px at 18% 22%, rgba(255, 255, 255, 0.16), transparent),
+    radial-gradient(0.8px 0.8px at 62% 12%, rgba(214, 228, 250, 0.13), transparent),
+    radial-gradient(0.8px 0.8px at 84% 54%, rgba(255, 255, 255, 0.12), transparent),
+    radial-gradient(0.8px 0.8px at 34% 68%, rgba(255, 240, 214, 0.1), transparent),
+    radial-gradient(0.8px 0.8px at 8% 88%, rgba(255, 255, 255, 0.11), transparent),
+    radial-gradient(0.8px 0.8px at 72% 84%, rgba(210, 224, 248, 0.1), transparent),
+    /* Mid field */
+    radial-gradient(1.1px 1.1px at 12% 34%, rgba(255, 255, 255, 0.32), transparent),
+    radial-gradient(1.1px 1.1px at 48% 18%, rgba(232, 242, 255, 0.27), transparent),
+    radial-gradient(1.1px 1.1px at 76% 44%, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(1.1px 1.1px at 28% 76%, rgba(255, 238, 208, 0.2), transparent),
+    radial-gradient(1.1px 1.1px at 92% 72%, rgba(255, 255, 255, 0.23), transparent),
+    /* Near bright stars with a whisper of bloom */
+    radial-gradient(1.7px 1.7px at 22% 26%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(5px 5px at 22% 26%, rgba(190, 220, 255, 0.06), transparent),
+    radial-gradient(1.5px 1.5px at 68% 62%, rgba(240, 248, 255, 0.4), transparent),
+    radial-gradient(5px 5px at 68% 62%, rgba(180, 214, 255, 0.05), transparent),
+    radial-gradient(1.4px 1.4px at 88% 18%, rgba(255, 236, 202, 0.3), transparent);
+  background-size:
+    240px 240px, 240px 240px, 240px 240px, 240px 240px, 240px 240px, 240px 240px,
+    430px 430px, 430px 430px, 430px 430px, 430px 430px, 430px 430px,
+    760px 760px, 760px 760px, 760px 760px, 760px 760px, 760px 760px;
+  background-repeat: repeat;
+  /* Never let the starfield end on a visible edge */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 8%,
+    #000 22%,
+    #000 84%,
+    rgba(0, 0, 0, 0.6) 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 8%,
+    #000 22%,
+    #000 84%,
+    rgba(0, 0, 0, 0.6) 95%,
+    transparent 100%
+  );
+}
+
+/* Soft luminous field — whisper of light along the path, not a blue panel */
+.journey-core-glow {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(980px, 92vw);
+  height: 360px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(50, 110, 185, 0.06) 0%,
+    rgba(28, 72, 140, 0.025) 42%,
+    transparent 74%
+  );
+  filter: blur(72px);
+  pointer-events: none;
+}
+
+/* Soft energy veil under the route — atmosphere, not UI chrome */
+.journey-route::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: -40px;
+  height: 120px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 100% 70% at 50% 50%,
+    rgba(50, 115, 185, 0.07) 0%,
+    rgba(28, 72, 140, 0.025) 50%,
+    transparent 76%
+  );
+  filter: blur(42px);
+}
+
+/* Celestial navigation beacons — small stars, soft volumetric halo */
+.journey-beacon {
+  --beacon-core: 0.26;
+  --beacon-glow:
+    0 0 10px rgba(180, 218, 255, 0.07),
+    0 0 28px rgba(100, 168, 235, 0.04);
+  border-width: 0;
+  border-color: transparent !important;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, var(--beacon-core)) 0%,
+      rgba(210, 234, 255, calc(var(--beacon-core) * 0.45)) 12%,
+      rgba(130, 190, 245, calc(var(--beacon-core) * 0.18)) 28%,
+      rgba(60, 120, 200, calc(var(--beacon-core) * 0.06)) 48%,
+      transparent 68%
+    ) !important;
+  box-shadow: var(--beacon-glow);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Soft volumetric halo — light in surrounding space */
+.journey-beacon::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(180, 220, 255, calc(var(--beacon-core) * 0.22)) 0%,
+    rgba(110, 175, 240, calc(var(--beacon-core) * 0.09)) 30%,
+    rgba(55, 120, 200, calc(var(--beacon-core) * 0.03)) 52%,
+    transparent 76%
+  );
+  filter: blur(11px);
+  transition: background 700ms ease;
+}
+
+.journey-beacon svg {
+  opacity: 0.28;
+  filter: drop-shadow(0 0 4px rgba(200, 230, 255, 0.35));
+}
+
+/* Orbital index — part of navigation light, not a UI badge */
+.journey-beacon > span,
+.journey-beacon-num {
+  background: transparent !important;
+  box-shadow: none;
+  font-weight: 500;
+  border: none;
+  letter-spacing: 0.08em;
+  color: rgba(220, 236, 255, 0.34) !important;
+  text-shadow: 0 0 8px rgba(160, 210, 255, 0.25);
+}
+
+/* Spatial depth — each beacon at its own distance */
+.journey-route .grid > *:nth-child(1) .journey-beacon:not(.journey-beacon-active) {
+  --beacon-core: 0.32;
+}
+
+.journey-route .grid > *:nth-child(2) .journey-beacon:not(.journey-beacon-active) {
+  --beacon-core: 0.22;
+}
+
+.journey-route .grid > *:nth-child(3) .journey-beacon:not(.journey-beacon-active) {
+  --beacon-core: 0.18;
+}
+
+.journey-route .grid > *:nth-child(4) .journey-beacon:not(.journey-beacon-active) {
+  --beacon-core: 0.24;
+}
+
+.journey-route .grid > *:nth-child(5) .journey-beacon:not(.journey-beacon-active) {
+  --beacon-core: 0.28;
+  --beacon-glow:
+    0 0 10px rgba(232, 226, 210, 0.06),
+    0 0 28px rgba(170, 150, 120, 0.03);
+}
+
+.journey-beacon-active {
+  --beacon-core: 0.52;
+  --beacon-glow:
+    0 0 14px rgba(200, 232, 255, 0.1),
+    0 0 40px rgba(110, 178, 242, 0.055),
+    0 0 80px rgba(60, 128, 205, 0.025);
+  border-color: transparent !important;
+  opacity: 1 !important;
+}
+
+.journey-beacon-active svg {
+  opacity: 0.55;
+  filter: drop-shadow(0 0 5px rgba(205, 234, 255, 0.4));
+}
+
+.journey-beacon-active > span,
+.journey-beacon-active .journey-beacon-num {
+  color: rgba(236, 246, 255, 0.62) !important;
+  background: transparent !important;
+  box-shadow: none;
+  text-shadow: 0 0 10px rgba(170, 220, 255, 0.3);
+}
+
+/* Glass panel emerging from space beside the station */
+.journey-stage-caption {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(200, 230, 255, 0.08) !important;
+  background:
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(22, 44, 84, 0.14) 44%,
+      rgba(5, 9, 20, 0.16) 100%
+    ) !important;
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.32),
+    0 0 28px rgba(56, 122, 196, 0.08),
+    0 0 72px rgba(38, 96, 172, 0.05),
+    0 0 1px rgba(180, 220, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -14px 28px rgba(6, 14, 32, 0.22),
+    inset 0 0 28px rgba(150, 200, 245, 0.035) !important;
+  backdrop-filter: blur(36px) saturate(1.22);
+  -webkit-backdrop-filter: blur(36px) saturate(1.22);
+}
+
+.journey-stage-caption::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.09) 0%,
+      rgba(255, 255, 255, 0.02) 28%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      rgba(140, 200, 255, 0.12) 0%,
+      transparent 70%
+    );
+  opacity: 0.7;
+}
+
+/* Soft luminous rim — light leaking from the nearby station */
+.journey-stage-caption::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    160deg,
+    rgba(180, 220, 255, 0.22) 0%,
+    transparent 28%,
+    transparent 72%,
+    rgba(100, 160, 230, 0.08) 100%
+  );
+  opacity: 0.55;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+}
+
+.journey-stage-caption > * {
+  position: relative;
+  z-index: 1;
+}
+
+.journey-route-mobile {
+  background: linear-gradient(
+    to bottom,
+    rgba(22, 139, 255, 0) 0%,
+    rgba(101, 199, 255, 0.28) 18%,
+    rgba(101, 199, 255, 0.32) 55%,
+    rgba(168, 220, 255, 0.22) 88%,
+    rgba(168, 220, 255, 0) 100%
+  );
+  box-shadow:
+    0 0 16px rgba(101, 199, 255, 0.14),
+    0 0 36px rgba(22, 139, 255, 0.05);
+  opacity: 0.45;
+}

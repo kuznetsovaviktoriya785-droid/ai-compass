@@ -1,0 +1,250 @@
+import { useState } from 'react'
+import JourneyStarfield from './JourneyStarfield'
+import ScrollReveal from './ScrollReveal'
+
+const stages = [
+  {
+    id: 1,
+    title: 'Долина Первого Света',
+    description: 'Знакомство с основами ИИ: что это такое, как работает и с чего начать путь.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: 2,
+    title: 'Лес Промптов',
+    description: 'Мастерство общения с ИИ: написание эффективных промптов и получение точных результатов.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    ),
+  },
+  {
+    id: 3,
+    title: 'Океан Данных',
+    description: 'Работа с данными: анализ, визуализация и принятие решений на основе информации.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+      </svg>
+    ),
+  },
+  {
+    id: 4,
+    title: 'Город ИИ-агентов',
+    description: 'Автономные агенты и автоматизация: создание умных помощников для ваших задач.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+  },
+  {
+    id: 5,
+    title: 'Вершина Создателя ИИ',
+    description: 'Создание собственных ИИ-продуктов: от идеи до реализации и масштабирования.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
+  },
+]
+
+function StagePoint({
+  stage,
+  active,
+  onActivate,
+}: {
+  stage: (typeof stages)[0]
+  active: boolean
+  onActivate: () => void
+}) {
+  return (
+    <div className="relative flex flex-col items-center">
+      <button
+        type="button"
+        className={`journey-beacon group relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050914] ${
+          active
+            ? 'journey-beacon-active text-brand-sky'
+            : 'text-brand-sky/70'
+        }`}
+        onMouseEnter={onActivate}
+        onFocus={onActivate}
+        onClick={onActivate}
+        aria-label={stage.title}
+      >
+        {stage.icon}
+        <span className="journey-beacon-num absolute -top-3 left-1/2 flex h-4 w-4 -translate-x-1/2 items-center justify-center text-[9px] tracking-widest">
+          {stage.id}
+        </span>
+      </button>
+
+      <div
+        className={`journey-stage-caption mt-4 w-full max-w-[220px] rounded-2xl p-4 text-center transition-all duration-500 ${
+          active
+            ? 'opacity-100'
+            : 'opacity-0 lg:pointer-events-none lg:absolute lg:mt-0 lg:top-14 lg:opacity-0'
+        }`}
+      >
+        <h3 className="text-sm font-semibold text-text-primary">{stage.title}</h3>
+        <p className="mt-1.5 text-xs leading-relaxed text-text-secondary">{stage.description}</p>
+      </div>
+    </div>
+  )
+}
+
+export default function JourneyMap() {
+  const [activeStage, setActiveStage] = useState(0)
+
+  return (
+    <section id="journey" className="journey-section relative scroll-mt-20 overflow-hidden pb-20 sm:pb-28">
+      <div className="journey-atmosphere pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="journey-haze journey-haze-far" />
+        <div className="journey-haze journey-haze-near" />
+        <JourneyStarfield />
+        <div className="journey-dust" />
+        <div className="journey-core-glow" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="journey-title text-3xl font-bold tracking-tight sm:text-4xl">
+              Ваш маршрут по миру{' '}
+              <span className="text-gradient">искусственного интеллекта</span>
+            </h2>
+            <p className="mt-4 text-lg text-text-secondary">
+              Пять этапов путешествия — от первых шагов до создания собственных ИИ-решений.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Desktop horizontal map */}
+        <ScrollReveal delay={200}>
+          <div className="journey-route relative mt-16 hidden lg:block">
+            <svg
+              className="absolute -top-10 left-[-2%] right-[-2%] h-32 w-[104%]"
+              viewBox="0 0 1000 128"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#168BFF" stopOpacity="0" />
+                  <stop offset="10%" stopColor="#3AA0FF" stopOpacity="0.14" />
+                  <stop offset="40%" stopColor="#65C7FF" stopOpacity="0.28" />
+                  <stop offset="70%" stopColor="#A8DCFF" stopOpacity="0.24" />
+                  <stop offset="90%" stopColor="#D4C8A8" stopOpacity="0.14" />
+                  <stop offset="100%" stopColor="#E7D3A8" stopOpacity="0" />
+                </linearGradient>
+                <linearGradient id="routeGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#168BFF" stopOpacity="0" />
+                  <stop offset="14%" stopColor="#3AA0FF" stopOpacity="0.07" />
+                  <stop offset="45%" stopColor="#65C7FF" stopOpacity="0.12" />
+                  <stop offset="78%" stopColor="#A8DCFF" stopOpacity="0.1" />
+                  <stop offset="92%" stopColor="#D9C293" stopOpacity="0.05" />
+                  <stop offset="100%" stopColor="#D9C293" stopOpacity="0" />
+                </linearGradient>
+                <filter id="routeGlow" x="-40%" y="-400%" width="180%" height="900%">
+                  <feGaussianBlur stdDeviation="2.8" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="routeBloom" x="-90%" y="-900%" width="280%" height="1800%">
+                  <feGaussianBlur stdDeviation="16" result="bloom" />
+                  <feMerge>
+                    <feMergeNode in="bloom" />
+                  </feMerge>
+                </filter>
+              </defs>
+              {/* Continuous cosmic energy stream — soft orbital flow, stages unmoved */}
+              <path
+                className="journey-route-bloom"
+                d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                fill="none"
+                stroke="url(#routeGradSoft)"
+                strokeWidth="16"
+                strokeLinecap="round"
+                filter="url(#routeBloom)"
+                opacity="0.85"
+              />
+              <path
+                className="journey-route-line"
+                d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                fill="none"
+                stroke="url(#routeGrad)"
+                strokeWidth="0.65"
+                strokeLinecap="round"
+                filter="url(#routeGlow)"
+                opacity="0.55"
+              />
+            </svg>
+
+            <div className="relative grid grid-cols-5 gap-4 sm:gap-5">
+              {stages.map((stage, i) => (
+                <StagePoint
+                  key={stage.id}
+                  stage={stage}
+                  active={activeStage === i}
+                  onActivate={() => setActiveStage(i)}
+                />
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Mobile vertical route */}
+        <ScrollReveal delay={200}>
+          <div className="relative mt-12 lg:hidden">
+            <div className="journey-route-mobile absolute left-6 top-0 bottom-0 w-px" />
+
+            <div className="space-y-8">
+              {stages.map((stage, i) => (
+                <div key={stage.id} className="relative flex gap-6 pl-2">
+                  <button
+                    type="button"
+                    className={`journey-beacon relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/25 ${
+                      activeStage === i
+                        ? 'journey-beacon-active text-brand-sky'
+                        : 'text-brand-sky/70'
+                    }`}
+                    onClick={() => setActiveStage(i)}
+                    aria-label={stage.title}
+                  >
+                    {stage.icon}
+                  </button>
+                  <div
+                    className={`journey-stage-caption flex-1 rounded-2xl p-4 transition-all duration-500 ${
+                      activeStage === i ? 'opacity-100' : 'opacity-65'
+                    }`}
+                    onClick={() => setActiveStage(i)}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveStage(i)}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="journey-beacon-num flex h-4 w-4 items-center justify-center text-[9px]">
+                        {stage.id}
+                      </span>
+                      <h3 className="font-semibold text-text-primary">{stage.title}</h3>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                      {stage.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  )
+}
