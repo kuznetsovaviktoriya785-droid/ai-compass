@@ -16,10 +16,10 @@ function CrystalSvg() {
           x2="82%"
           y2="100%"
         >
-          <stop offset="0%" stopColor="#E8F4FC" stopOpacity="0.45" />
-          <stop offset="18%" stopColor="#A8D0E8" stopOpacity="0.28" />
-          <stop offset="45%" stopColor="#4A88A8" stopOpacity="0.32" />
-          <stop offset="72%" stopColor="#0E3848" stopOpacity="0.42" />
+          <stop offset="0%" stopColor="#F0E3C0" stopOpacity="0.45" />
+          <stop offset="18%" stopColor="#E6D2A2" stopOpacity="0.28" />
+          <stop offset="45%" stopColor="#B09868" stopOpacity="0.32" />
+          <stop offset="72%" stopColor="#2A2418" stopOpacity="0.42" />
           <stop offset="100%" stopColor="#02060C" stopOpacity="0.62" />
         </linearGradient>
 
@@ -31,9 +31,9 @@ function CrystalSvg() {
           y2="85%"
         >
           <stop offset="0%" stopColor="#FFFFFF" stopOpacity="1" />
-          <stop offset="10%" stopColor="#F4FAFF" stopOpacity="0.92" />
-          <stop offset="36%" stopColor="#C8E8FF" stopOpacity="0.48" />
-          <stop offset="100%" stopColor="#7EB8D0" stopOpacity="0" />
+          <stop offset="10%" stopColor="#F0E3C0" stopOpacity="0.92" />
+          <stop offset="36%" stopColor="#E6D2A2" stopOpacity="0.48" />
+          <stop offset="100%" stopColor="#D9BE7A" stopOpacity="0" />
         </linearGradient>
 
         <linearGradient
@@ -43,7 +43,7 @@ function CrystalSvg() {
           x2="100%"
           y2="100%"
         >
-          <stop offset="0%" stopColor="#0A2840" stopOpacity="0.18" />
+          <stop offset="0%" stopColor="#1A1610" stopOpacity="0.18" />
           <stop offset="45%" stopColor="#020A12" stopOpacity="0.5" />
           <stop offset="100%" stopColor="#010508" stopOpacity="0.78" />
         </linearGradient>
@@ -55,7 +55,7 @@ function CrystalSvg() {
           x2="0%"
           y2="100%"
         >
-          <stop offset="0%" stopColor="#3A7AA8" stopOpacity="0.22" />
+          <stop offset="0%" stopColor="#B09868" stopOpacity="0.22" />
           <stop offset="100%" stopColor="#01080E" stopOpacity="0.55" />
         </linearGradient>
 
@@ -67,23 +67,23 @@ function CrystalSvg() {
           y2="100%"
         >
           <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
-          <stop offset="40%" stopColor="#C8E0F4" stopOpacity="0.45" />
+          <stop offset="40%" stopColor="#F0E3C0" stopOpacity="0.45" />
           <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.22" />
         </linearGradient>
 
         <radialGradient id="heroCrystalCoreWarm" cx="44%" cy="34%" r="32%">
-          <stop offset="0%" stopColor="#FFFCF5" stopOpacity="0.7" />
-          <stop offset="30%" stopColor="#F0E4C8" stopOpacity="0.32" />
-          <stop offset="60%" stopColor="#C4A574" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#C4A574" stopOpacity="0" />
+          <stop offset="0%" stopColor="#F0E3C0" stopOpacity="0.7" />
+          <stop offset="30%" stopColor="#F0E3C0" stopOpacity="0.32" />
+          <stop offset="60%" stopColor="#D9BE7A" stopOpacity="0.08" />
+          <stop offset="100%" stopColor="#D9BE7A" stopOpacity="0" />
         </radialGradient>
 
         <radialGradient id="heroCrystalCoreBlue" cx="48%" cy="36%" r="50%">
           <stop offset="0%" stopColor="#FFFFFF" stopOpacity="1" />
-          <stop offset="10%" stopColor="#E0F4FF" stopOpacity="0.88" />
-          <stop offset="30%" stopColor="#8CC4F5" stopOpacity="0.5" />
-          <stop offset="58%" stopColor="#4A98E0" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#1A5080" stopOpacity="0" />
+          <stop offset="10%" stopColor="#F0E3C0" stopOpacity="0.88" />
+          <stop offset="30%" stopColor="#E6D2A2" stopOpacity="0.5" />
+          <stop offset="58%" stopColor="#D9BE7A" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#6B5938" stopOpacity="0" />
         </radialGradient>
 
         <linearGradient
@@ -93,11 +93,11 @@ function CrystalSvg() {
           x2="90%"
           y2="80%"
         >
-          <stop offset="0%" stopColor="#B8D4F0" stopOpacity="0" />
-          <stop offset="35%" stopColor="#D4C4E8" stopOpacity="0.16" />
+          <stop offset="0%" stopColor="#E6D2A2" stopOpacity="0" />
+          <stop offset="35%" stopColor="#E6D2A2" stopOpacity="0.16" />
           <stop offset="55%" stopColor="#E8D4B8" stopOpacity="0.12" />
-          <stop offset="75%" stopColor="#A8D0C8" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#B8D4F0" stopOpacity="0" />
+          <stop offset="75%" stopColor="#D9BE7A" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="#E6D2A2" stopOpacity="0" />
         </linearGradient>
 
         <linearGradient
@@ -109,8 +109,8 @@ function CrystalSvg() {
         >
           <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
           <stop offset="24%" stopColor="#FFFFFF" stopOpacity="0.72" />
-          <stop offset="38%" stopColor="#EAF6FF" stopOpacity="0.52" />
-          <stop offset="54%" stopColor="#B8DCFF" stopOpacity="0.26" />
+          <stop offset="38%" stopColor="#F0E3C0" stopOpacity="0.52" />
+          <stop offset="54%" stopColor="#E6D2A2" stopOpacity="0.26" />
           <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
         </linearGradient>
 
@@ -154,7 +154,7 @@ function CrystalSvg() {
       />
       <polygon
         points="41,5 49,24 40,34"
-        fill="#F5FAFF"
+        fill="#F0E3C0"
         opacity="0.36"
         style={{ mixBlendMode: 'screen' }}
       />
@@ -212,13 +212,13 @@ function CrystalSvg() {
       {/* Mid-body glass transmission */}
       <polygon
         points="28,36 40,52 52,36 49,70 40,82 30,70"
-        fill="#6AB4E0"
+        fill="#E6D2A2"
         opacity="0.24"
         style={{ mixBlendMode: 'screen' }}
       />
       <polygon
         points="34,42 40,48 46,42 43,62 40,70 36,62"
-        fill="#B8E0FF"
+        fill="#E6D2A2"
         opacity="0.3"
         style={{ mixBlendMode: 'screen' }}
       />
@@ -277,19 +277,19 @@ function CrystalSvg() {
       />
       <polygon
         points="42,8 52,22 46,30 40,18"
-        fill="#E8F4FF"
+        fill="#F0E3C0"
         opacity="0.5"
         style={{ mixBlendMode: 'screen' }}
       />
       <polygon
         points="34,40 40,44 37,58 32,52"
-        fill="#B8DCFF"
+        fill="#E6D2A2"
         opacity="0.38"
         style={{ mixBlendMode: 'screen' }}
       />
       <polygon
         points="44,48 50,42 48,62 44,58"
-        fill="#D0E8FF"
+        fill="#E6D2A2"
         opacity="0.28"
         style={{ mixBlendMode: 'screen' }}
       />

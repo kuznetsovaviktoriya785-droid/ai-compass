@@ -190,7 +190,8 @@ export default function Hero() {
           <h1 className="hero-scene-title">AI Compass</h1>
 
           <p className="hero-scene-subtitle">
-            Ваш проводник в мире искусственного интеллекта.
+            Ваш проводник в мире{' '}
+            <span className="hero-scene-accent">искусственного интеллекта</span>.
             <br />
             От первого вопроса — до собственных ИИ-проектов.
           </p>

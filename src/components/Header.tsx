@@ -43,7 +43,7 @@ export default function Header() {
 
           <a
             href="#start"
-            className="site-header-button btn-glow rounded-full bg-gradient-to-r from-brand-blue to-brand-sky px-6 py-2.5 text-sm font-semibold text-white"
+            className="site-header-button btn-glow rounded-full bg-gradient-to-r from-brand-blue to-brand-sky px-6 py-2.5 text-sm font-semibold text-night"
           >
             Начать
           </a>
@@ -107,7 +107,7 @@ export default function Header() {
             <a
               href="#start"
               onClick={handleNavClick}
-              className="site-header-button btn-glow mt-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-sky px-6 py-3 text-center text-sm font-semibold text-white"
+              className="site-header-button btn-glow mt-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-sky px-6 py-3 text-center text-sm font-semibold text-night"
             >
               Начать
             </a>

@@ -105,7 +105,7 @@ export default function HeroStarfield() {
             roll < 0.1
               ? `rgba(255,230,190,${a})`
               : roll > 0.9
-                ? `rgba(200,210,240,${a})`
+                ? `rgba(230, 210, 162,${a})`
                 : `rgba(248,247,244,${a})`
 
           if (r > 1.2 && dens > 0.5) {

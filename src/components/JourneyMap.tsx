@@ -6,7 +6,8 @@ const stages = [
   {
     id: 1,
     title: 'Долина Первого Света',
-    description: 'Знакомство с основами ИИ: что это такое, как работает и с чего начать путь.',
+    description:
+      'Откройте для себя мир искусственного интеллекта. Узнайте, как работают современные AI-технологии и с чего начать своё путешествие.',
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -16,7 +17,8 @@ const stages = [
   {
     id: 2,
     title: 'Лес Промптов',
-    description: 'Мастерство общения с ИИ: написание эффективных промптов и получение точных результатов.',
+    description:
+      'Научитесь общаться с искусственным интеллектом. Освойте создание точных промптов и получайте результаты, которые действительно работают.',
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -26,7 +28,8 @@ const stages = [
   {
     id: 3,
     title: 'Океан Данных',
-    description: 'Работа с данными: анализ, визуализация и принятие решений на основе информации.',
+    description:
+      'Используйте возможности AI для анализа информации, поиска закономерностей и принятия более уверенных решений.',
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
@@ -35,8 +38,9 @@ const stages = [
   },
   {
     id: 4,
-    title: 'Город ИИ-агентов',
-    description: 'Автономные агенты и автоматизация: создание умных помощников для ваших задач.',
+    title: 'Горы Инноваторов',
+    description:
+      'Автоматизируйте повседневные задачи, экспериментируйте с новыми инструментами и открывайте возможности для роста.',
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -45,8 +49,9 @@ const stages = [
   },
   {
     id: 5,
-    title: 'Вершина Создателя ИИ',
-    description: 'Создание собственных ИИ-продуктов: от идеи до реализации и масштабирования.',
+    title: 'Вершина Создателя AI',
+    description:
+      'Создавайте собственные AI-проекты, воплощайте идеи в жизнь и открывайте новые горизонты вместе с искусственным интеллектом.',
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -119,7 +124,7 @@ export default function JourneyMap() {
               <span className="text-gradient">искусственного интеллекта</span>
             </h2>
             <p className="mt-4 text-lg text-text-secondary">
-              Пять этапов путешествия — от первых шагов до создания собственных ИИ-решений.
+              Каждый этап открывает новые возможности. Двигайтесь в своём темпе — от первых открытий до уверенного создания собственных AI-проектов.
             </p>
           </div>
         </ScrollReveal>
@@ -135,20 +140,20 @@ export default function JourneyMap() {
             >
               <defs>
                 <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#168BFF" stopOpacity="0" />
-                  <stop offset="10%" stopColor="#3AA0FF" stopOpacity="0.14" />
-                  <stop offset="40%" stopColor="#65C7FF" stopOpacity="0.28" />
-                  <stop offset="70%" stopColor="#A8DCFF" stopOpacity="0.24" />
-                  <stop offset="90%" stopColor="#D4C8A8" stopOpacity="0.14" />
-                  <stop offset="100%" stopColor="#E7D3A8" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#E6D2A2" stopOpacity="0" />
+                  <stop offset="10%" stopColor="#E6D2A2" stopOpacity="0.14" />
+                  <stop offset="40%" stopColor="#E6D2A2" stopOpacity="0.28" />
+                  <stop offset="70%" stopColor="#E6D2A2" stopOpacity="0.24" />
+                  <stop offset="90%" stopColor="#E6D2A2" stopOpacity="0.14" />
+                  <stop offset="100%" stopColor="#E6D2A2" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="routeGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#168BFF" stopOpacity="0" />
-                  <stop offset="14%" stopColor="#3AA0FF" stopOpacity="0.07" />
-                  <stop offset="45%" stopColor="#65C7FF" stopOpacity="0.12" />
-                  <stop offset="78%" stopColor="#A8DCFF" stopOpacity="0.1" />
-                  <stop offset="92%" stopColor="#D9C293" stopOpacity="0.05" />
-                  <stop offset="100%" stopColor="#D9C293" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#E6D2A2" stopOpacity="0" />
+                  <stop offset="14%" stopColor="#E6D2A2" stopOpacity="0.07" />
+                  <stop offset="45%" stopColor="#E6D2A2" stopOpacity="0.12" />
+                  <stop offset="78%" stopColor="#E6D2A2" stopOpacity="0.1" />
+                  <stop offset="92%" stopColor="#D9BE7A" stopOpacity="0.05" />
+                  <stop offset="100%" stopColor="#D9BE7A" stopOpacity="0" />
                 </linearGradient>
                 <filter id="routeGlow" x="-40%" y="-400%" width="180%" height="900%">
                   <feGaussianBlur stdDeviation="2.8" result="blur" />
@@ -174,6 +179,7 @@ export default function JourneyMap() {
                 strokeLinecap="round"
                 filter="url(#routeBloom)"
                 opacity="0.85"
+                pathLength={1102}
               />
               <path
                 className="journey-route-line"
@@ -184,6 +190,26 @@ export default function JourneyMap() {
                 strokeLinecap="round"
                 filter="url(#routeGlow)"
                 opacity="0.55"
+                pathLength={1102}
+              />
+              {/* Light pulse + soft trail — same Bezier d, travels via stroke-dashoffset */}
+              <path
+                className="journey-route-spark-trail"
+                d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                fill="none"
+                stroke="#E6D2A2"
+                strokeWidth="2"
+                strokeLinecap="round"
+                pathLength={1102}
+              />
+              <path
+                className="journey-route-spark"
+                d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                fill="none"
+                stroke="#E6D2A2"
+                strokeWidth="2.6"
+                strokeLinecap="round"
+                pathLength={1102}
               />
             </svg>
 
@@ -244,6 +270,10 @@ export default function JourneyMap() {
             </div>
           </div>
         </ScrollReveal>
+
+        <p className="mt-12 text-center text-sm text-text-secondary sm:mt-14">
+          Ваше путешествие только начинается.
+        </p>
       </div>
     </section>
   )

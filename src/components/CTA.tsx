@@ -6,7 +6,7 @@ export default function CTA() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="relative overflow-hidden rounded-3xl border border-brand-blue/20 bg-gradient-to-br from-brand-blue/20 via-night-light to-brand-gold/10 px-6 py-16 text-center shadow-glow sm:px-12 sm:py-20">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(22,139,255,0.15)_0%,transparent_50%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(230, 210, 162,0.15)_0%,transparent_50%)]" />
             <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-brand-blue/10 blur-2xl" />
             <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-brand-gold/10 blur-2xl" />
 
@@ -22,7 +22,7 @@ export default function CTA() {
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <button
                   type="button"
-                  className="btn-glow inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-sky px-8 py-4 text-base font-semibold text-white transition-all hover:brightness-110 sm:w-auto"
+                  className="btn-glow inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-sky px-8 py-4 text-base font-semibold text-night transition-all hover:brightness-110 sm:w-auto"
                 >
                   Начать
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

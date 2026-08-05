@@ -4,45 +4,42 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Фоновые поверхности
         night: {
           DEFAULT: '#050914',
           light: '#09152B',
         },
-        // Фирменная палитра AI Compass → утилиты: brand-blue, brand-sky, brand-gold
+        // Champagne Gold accents (legacy names brand-blue / brand-sky)
         brand: {
-          blue: '#168BFF',
-          sky: '#65C7FF',
-          gold: '#D9B56D',
+          blue: '#E6D2A2',
+          sky: '#F0E3C0',
+          gold: '#D9BE7A',
         },
-        // Типографика → утилиты: text-primary, text-secondary
         text: {
-          primary: '#F7F8FC',
-          secondary: '#AAB6CC',
+          primary: '#FFFFFF',
+          secondary: 'rgba(255, 255, 255, 0.72)',
         },
-        // Расширенная синяя шкала (compass-*)
         compass: {
-          50: '#f0f7ff',
-          100: '#e0effe',
-          200: '#b9dffd',
-          300: '#7cc5fb',
-          400: '#36a7f6',
-          500: '#0c8ce9',
-          600: '#006fc7',
-          700: '#0158a1',
-          800: '#064b85',
-          900: '#0b3f6e',
+          50: '#F7F1E4',
+          100: '#F0E3C0',
+          200: '#E6D2A2',
+          300: '#E0C896',
+          400: '#D9BE7A',
+          500: '#D9BE7A',
+          600: '#B09868',
+          700: '#8F7C54',
+          800: '#6E6042',
+          900: '#4A412E',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        glow: '0 0 40px rgba(22, 139, 255, 0.25)',
-        'glow-gold': '0 0 40px rgba(217, 181, 109, 0.2)',
-        'glow-sm': '0 0 20px rgba(22, 139, 255, 0.15)',
+        glow: '0 0 40px rgba(230, 210, 162, 0.18)',
+        'glow-gold': '0 0 40px rgba(217, 190, 122, 0.16)',
+        'glow-sm': '0 0 20px rgba(230, 210, 162, 0.12)',
         card: '0 8px 32px rgba(0, 0, 0, 0.4)',
-        'card-hover': '0 16px 48px rgba(22, 139, 255, 0.15)',
+        'card-hover': '0 16px 48px rgba(230, 210, 162, 0.1)',
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',

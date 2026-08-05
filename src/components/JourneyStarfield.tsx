@@ -92,12 +92,12 @@ export default function JourneyStarfield() {
             roll < 0.1
               ? `rgba(255,232,196,${a})`
               : roll > 0.9
-                ? `rgba(198,212,242,${a})`
-                : `rgba(246,247,250,${a})`
+                ? `rgba(230, 210, 162,${a})`
+                : `rgba(245,240,230,${a})`
 
           if (r > 1.1) {
             ctx.beginPath()
-            ctx.fillStyle = `rgba(210,232,255,${a * 0.1})`
+            ctx.fillStyle = `rgba(230, 210, 162,${a * 0.1})`
             ctx.arc(x, y, r * 2.6, 0, Math.PI * 2)
             ctx.fill()
           }
