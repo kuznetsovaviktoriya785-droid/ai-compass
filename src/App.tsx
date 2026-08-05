@@ -1,6 +1,6 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
-import WhyCompass from './components/why/WhyCompass'
+import WhyCompass  from './components/why/WhyCompass'
 import JourneyMap from './components/JourneyMap'
 import About from './components/About'
 import Features from './components/Features'
@@ -11,16 +11,19 @@ export default function App() {
   return (
     <div className="min-h-screen bg-night">
       <Header />
+  
       <main>
         <div className="universe-canvas">
+
           <Hero />
           <WhyCompass />
           <JourneyMap />
+          <About />
+          <Features />
+          <CTA />
         </div>
-        <About />
-        <Features />
-        <CTA />
       </main>
+  
       <Footer />
     </div>
   )
