@@ -35,12 +35,13 @@ export default function JourneyStarfield() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, w, h)
 
-      // Quiet distant nebulae, kept away from the centre
+      // Quiet distant navy / cosmic haze — kept away from the centre
       const washes = [
-        { x: 0.1, y: 0.3, rx: 0.3, ry: 0.34, c: 'rgba(48,44,74,0.05)' },
-        { x: 0.9, y: 0.36, rx: 0.28, ry: 0.32, c: 'rgba(38,46,72,0.045)' },
-        { x: 0.24, y: 0.86, rx: 0.3, ry: 0.28, c: 'rgba(34,42,68,0.04)' },
-        { x: 0.78, y: 0.9, rx: 0.26, ry: 0.24, c: 'rgba(56,48,44,0.028)' },
+        { x: 0.1, y: 0.3, rx: 0.3, ry: 0.34, c: 'rgba(28,48,88,0.055)' },
+        { x: 0.9, y: 0.36, rx: 0.28, ry: 0.32, c: 'rgba(22,40,72,0.05)' },
+        { x: 0.24, y: 0.86, rx: 0.3, ry: 0.28, c: 'rgba(26,44,78,0.045)' },
+        { x: 0.78, y: 0.9, rx: 0.26, ry: 0.24, c: 'rgba(40,36,58,0.03)' },
+        { x: 0.5, y: 0.12, rx: 0.42, ry: 0.18, c: 'rgba(18,32,58,0.035)' },
       ]
       for (const wash of washes) {
         const g = ctx.createRadialGradient(
@@ -68,11 +69,12 @@ export default function JourneyStarfield() {
         return corridor * edgeLift
       }
 
+      // Far → near depth planes (dim distant, brighter near)
       const layers = [
-        { n: 2400, size: [0.22, 0.5], a: [0.05, 0.14] },
-        { n: 1200, size: [0.32, 0.8], a: [0.08, 0.22] },
-        { n: 460, size: [0.45, 1.1], a: [0.12, 0.32] },
-        { n: 80, size: [0.8, 1.6], a: [0.24, 0.48] },
+        { n: 2600, size: [0.18, 0.42], a: [0.03, 0.1], near: false },
+        { n: 1300, size: [0.28, 0.7], a: [0.06, 0.18], near: false },
+        { n: 480, size: [0.4, 1.05], a: [0.1, 0.28], near: false },
+        { n: 70, size: [0.85, 1.7], a: [0.28, 0.52], near: true },
       ]
 
       s = 41
@@ -85,20 +87,23 @@ export default function JourneyStarfield() {
 
           const r = layer.size[0] + next() * (layer.size[1] - layer.size[0])
           let a = layer.a[0] + next() * (layer.a[1] - layer.a[0])
-          a *= 0.6 + dens * 0.4
+          a *= 0.55 + dens * 0.45
 
           const roll = next()
-          const fill =
-            roll < 0.1
-              ? `rgba(255,232,196,${a})`
-              : roll > 0.9
-                ? `rgba(230, 210, 162,${a})`
-                : `rgba(245,240,230,${a})`
+          const fill = layer.near
+            ? roll < 0.35
+              ? `rgba(255,248,235,${a})`
+              : `rgba(240,227,192,${a})`
+            : roll < 0.08
+              ? `rgba(255,232,196,${a * 0.85})`
+              : roll > 0.92
+                ? `rgba(230,210,162,${a * 0.9})`
+                : `rgba(230,235,245,${a * 0.75})`
 
-          if (r > 1.1) {
+          if (layer.near && r > 1.05) {
             ctx.beginPath()
-            ctx.fillStyle = `rgba(230, 210, 162,${a * 0.1})`
-            ctx.arc(x, y, r * 2.6, 0, Math.PI * 2)
+            ctx.fillStyle = `rgba(240,227,192,${a * 0.12})`
+            ctx.arc(x, y, r * 2.8, 0, Math.PI * 2)
             ctx.fill()
           }
 

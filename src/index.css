@@ -1948,36 +1948,65 @@ mask-composite: exclude;
   pointer-events: none;
   background: radial-gradient(
     ellipse 100% 70% at 50% 50%,
-    rgba(230, 210, 162, 0.07) 0%,
-    rgba(230, 210, 162, 0.025) 50%,
+    rgba(230, 210, 162, 0.09) 0%,
+    rgba(217, 190, 122, 0.035) 50%,
     transparent 76%
   );
   filter: blur(42px);
 }
 
-/* Celestial navigation beacons — small stars, soft volumetric halo */
+/* Progress — quiet ivory/champagne path marker */
+.journey-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.journey-progress-label {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240, 227, 192, 0.55);
+  text-shadow: 0 0 14px rgba(230, 210, 162, 0.12);
+}
+
+.journey-progress-stage {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: rgba(240, 227, 192, 0.82);
+  text-shadow: 0 0 16px rgba(230, 210, 162, 0.14);
+}
+
+/* Celestial stations — miniature glowing planets */
 .journey-beacon {
-  --beacon-core: 0.26;
+  --beacon-core: 0.34;
+  --beacon-ring: rgba(230, 210, 162, 0.28);
   --beacon-glow:
-    0 0 10px rgba(230, 210, 162, 0.07),
-    0 0 28px rgba(230, 210, 162, 0.04);
+    0 0 12px rgba(230, 210, 162, 0.12),
+    0 0 32px rgba(217, 190, 122, 0.06);
+  color: rgba(240, 227, 192, 0.78);
   border-width: 0;
   border-color: transparent !important;
   background:
     radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, var(--beacon-core)) 0%,
-      rgba(230, 210, 162, calc(var(--beacon-core) * 0.45)) 12%,
-      rgba(230, 210, 162, calc(var(--beacon-core) * 0.18)) 28%,
-      rgba(220, 195, 138, calc(var(--beacon-core) * 0.06)) 48%,
-      transparent 68%
+      circle at 38% 32%,
+      rgba(255, 252, 245, calc(var(--beacon-core) * 0.95)) 0%,
+      rgba(240, 227, 192, calc(var(--beacon-core) * 0.55)) 18%,
+      rgba(230, 210, 162, calc(var(--beacon-core) * 0.28)) 42%,
+      rgba(217, 190, 122, calc(var(--beacon-core) * 0.1)) 62%,
+      transparent 78%
     ) !important;
   box-shadow: var(--beacon-glow);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
-/* Soft volumetric halo — light in surrounding space */
+/* Soft volumetric halo */
 .journey-beacon::before {
   content: "";
   position: absolute;
@@ -1986,21 +2015,38 @@ mask-composite: exclude;
   pointer-events: none;
   background: radial-gradient(
     circle,
-    rgba(230, 210, 162, calc(var(--beacon-core) * 0.22)) 0%,
-    rgba(230, 210, 162, calc(var(--beacon-core) * 0.09)) 30%,
-    rgba(220, 195, 138, calc(var(--beacon-core) * 0.03)) 52%,
+    rgba(240, 227, 192, calc(var(--beacon-core) * 0.28)) 0%,
+    rgba(230, 210, 162, calc(var(--beacon-core) * 0.12)) 32%,
+    rgba(217, 190, 122, calc(var(--beacon-core) * 0.04)) 55%,
     transparent 76%
   );
   filter: blur(11px);
-  transition: background 700ms ease;
+  transition: background 700ms ease, opacity 700ms ease;
+}
+
+/* Thin planetary ring */
+.journey-beacon::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  pointer-events: none;
+  border: 1px solid var(--beacon-ring);
+  box-shadow:
+    0 0 8px rgba(230, 210, 162, 0.12),
+    inset 0 0 6px rgba(240, 227, 192, 0.08);
+  opacity: 0.7;
+  transition: border-color 700ms ease, opacity 700ms ease, inset 700ms ease;
 }
 
 .journey-beacon svg {
-  opacity: 0.28;
-  filter: drop-shadow(0 0 4px rgba(230, 210, 162, 0.35));
+  position: relative;
+  z-index: 1;
+  opacity: 0.72;
+  filter: drop-shadow(0 0 4px rgba(240, 227, 192, 0.35));
+  transition: opacity 700ms ease;
 }
 
-/* Orbital index — part of navigation light, not a UI badge */
 .journey-beacon > span,
 .journey-beacon-num {
   background: transparent !important;
@@ -2008,55 +2054,100 @@ mask-composite: exclude;
   font-weight: 500;
   border: none;
   letter-spacing: 0.08em;
-  color: rgba(230, 210, 162, 0.34) !important;
+  color: rgba(240, 227, 192, 0.42) !important;
   text-shadow: 0 0 8px rgba(230, 210, 162, 0.25);
 }
 
-/* Spatial depth — each beacon at its own distance */
-.journey-route .grid > *:nth-child(1) .journey-beacon:not(.journey-beacon-active) {
-  --beacon-core: 0.32;
-}
-
-.journey-route .grid > *:nth-child(2) .journey-beacon:not(.journey-beacon-active) {
-  --beacon-core: 0.22;
-}
-
-.journey-route .grid > *:nth-child(3) .journey-beacon:not(.journey-beacon-active) {
-  --beacon-core: 0.18;
-}
-
-.journey-route .grid > *:nth-child(4) .journey-beacon:not(.journey-beacon-active) {
-  --beacon-core: 0.24;
-}
-
-.journey-route .grid > *:nth-child(5) .journey-beacon:not(.journey-beacon-active) {
-  --beacon-core: 0.28;
+/* Completed — calm champagne / muted gold */
+.journey-beacon-completed {
+  --beacon-core: 0.4;
+  --beacon-ring: rgba(230, 210, 162, 0.38);
   --beacon-glow:
-    0 0 10px rgba(232, 226, 210, 0.06),
-    0 0 28px rgba(170, 150, 120, 0.03);
+    0 0 14px rgba(230, 210, 162, 0.16),
+    0 0 36px rgba(217, 190, 122, 0.08);
+  color: rgba(240, 227, 192, 0.88);
+  opacity: 0.92;
 }
 
+.journey-beacon-completed svg {
+  opacity: 0.78;
+}
+
+/* Active — brightest, ~18% larger, slow pulse */
 .journey-beacon-active {
-  --beacon-core: 0.52;
+  --beacon-core: 0.62;
+  --beacon-ring: rgba(240, 227, 192, 0.55);
   --beacon-glow:
-    0 0 14px rgba(230, 210, 162, 0.1),
-    0 0 40px rgba(230, 210, 162, 0.055),
-    0 0 80px rgba(217, 190, 122, 0.025);
-  border-color: transparent !important;
+    0 0 16px rgba(240, 227, 192, 0.22),
+    0 0 44px rgba(230, 210, 162, 0.12),
+    0 0 88px rgba(217, 190, 122, 0.05);
+  color: #F0E3C0;
   opacity: 1 !important;
+  transform: scale(1.18);
+  animation: journey-beacon-pulse 5.5s ease-in-out infinite;
+}
+
+.journey-beacon-active::after {
+  inset: -4px;
+  opacity: 0.9;
 }
 
 .journey-beacon-active svg {
-  opacity: 0.55;
-  filter: drop-shadow(0 0 5px rgba(230, 210, 162, 0.4));
+  opacity: 0.95;
+  filter: drop-shadow(0 0 6px rgba(240, 227, 192, 0.45));
 }
 
 .journey-beacon-active > span,
 .journey-beacon-active .journey-beacon-num {
-  color: rgba(230, 210, 162, 0.62) !important;
-  background: transparent !important;
-  box-shadow: none;
-  text-shadow: 0 0 10px rgba(230, 210, 162, 0.3);
+  color: rgba(240, 227, 192, 0.78) !important;
+  text-shadow: 0 0 10px rgba(230, 210, 162, 0.35);
+}
+
+/* Future — quieter, no pulse */
+.journey-beacon-future {
+  --beacon-core: 0.22;
+  --beacon-ring: rgba(230, 210, 162, 0.16);
+  --beacon-glow:
+    0 0 8px rgba(230, 210, 162, 0.05),
+    0 0 22px rgba(217, 190, 122, 0.03);
+  color: rgba(240, 227, 192, 0.45);
+  opacity: 0.48;
+}
+
+.journey-beacon-future svg {
+  opacity: 0.4;
+}
+
+.journey-beacon-future::after {
+  opacity: 0.4;
+}
+
+/* Finale station — warmer muted gold, never neon yellow */
+.journey-beacon-finale:not(.journey-beacon-future) {
+  --beacon-ring: rgba(217, 190, 122, 0.42);
+  --beacon-glow:
+    0 0 14px rgba(230, 210, 162, 0.14),
+    0 0 36px rgba(217, 190, 122, 0.1),
+    0 0 64px rgba(196, 165, 116, 0.04);
+}
+
+.journey-beacon-finale.journey-beacon-active {
+  --beacon-ring: rgba(217, 190, 122, 0.58);
+  --beacon-glow:
+    0 0 18px rgba(240, 227, 192, 0.2),
+    0 0 48px rgba(217, 190, 122, 0.14),
+    0 0 90px rgba(196, 165, 116, 0.06);
+}
+
+@keyframes journey-beacon-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.08);
+  }
 }
 
 /* Glass panel emerging from space beside the station */
@@ -2149,32 +2240,32 @@ mask-composite: exclude;
   opacity: 0.45;
 }
 
-/* Route line — soft champagne glow + draw along the existing Bezier curve */
+/* Route line — star trail draw + calm champagne pulse */
 .journey-route-bloom {
   stroke-dasharray: 1102;
   stroke-dashoffset: 1102;
   animation:
-    journey-route-draw 2.8s cubic-bezier(0.45, 0.05, 0.25, 1) forwards,
-    journey-route-glow 5.5s ease-in-out 2.8s infinite;
+    journey-route-draw 3.2s cubic-bezier(0.45, 0.05, 0.25, 1) forwards,
+    journey-route-glow 6.5s ease-in-out 3.2s infinite;
 }
 
 .journey-route-line {
   stroke-dasharray: 1102;
   stroke-dashoffset: 1102;
-  animation: journey-route-draw 2.8s cubic-bezier(0.45, 0.05, 0.25, 1) forwards;
+  animation: journey-route-draw 3.2s cubic-bezier(0.45, 0.05, 0.25, 1) forwards;
 }
 
-/* Calm light spark + soft fade trail — same Bezier, premium-slow along the path */
+/* Calm light spark + soft fade trail — same Bezier, premium-slow */
 .journey-route-spark-trail {
   stroke-dasharray: 160 942;
   stroke-dashoffset: 1102;
   opacity: 0;
   filter:
-    drop-shadow(0 0 8px rgba(230, 210, 162, 0.28))
-    drop-shadow(0 0 22px rgba(230, 210, 162, 0.14));
+    drop-shadow(0 0 8px rgba(230, 210, 162, 0.26))
+    drop-shadow(0 0 22px rgba(217, 190, 122, 0.12));
   animation:
-    journey-route-spark-fade-in 1.1s ease-out 2.5s forwards,
-    journey-route-spark 34s linear 2.6s infinite;
+    journey-route-spark-fade-in 1.2s ease-out 2.8s forwards,
+    journey-route-spark 36s linear 2.9s infinite;
 }
 
 .journey-route-spark {
@@ -2182,22 +2273,22 @@ mask-composite: exclude;
   stroke-dashoffset: 980;
   opacity: 0;
   filter:
-    drop-shadow(0 0 3px rgba(230, 210, 162, 0.7))
-    drop-shadow(0 0 10px rgba(217, 190, 122, 0.4))
-    drop-shadow(0 0 22px rgba(217, 190, 122, 0.18));
+    drop-shadow(0 0 3px rgba(240, 227, 192, 0.75))
+    drop-shadow(0 0 10px rgba(230, 210, 162, 0.4))
+    drop-shadow(0 0 22px rgba(217, 190, 122, 0.16));
   animation:
-    journey-route-spark-appear 1s ease-out 2.5s forwards,
-    journey-route-spark-head 34s linear 2.6s infinite;
+    journey-route-spark-appear 1.1s ease-out 2.8s forwards,
+    journey-route-spark-head 36s linear 2.9s infinite;
 }
 
 @keyframes journey-route-glow {
   0%,
   100% {
-    opacity: 0.7;
+    opacity: 0.72;
   }
 
   50% {
-    opacity: 0.95;
+    opacity: 0.92;
   }
 }
 
@@ -2209,17 +2300,16 @@ mask-composite: exclude;
 
 @keyframes journey-route-spark-fade-in {
   to {
-    opacity: 0.32;
+    opacity: 0.34;
   }
 }
 
 @keyframes journey-route-spark-appear {
   to {
-    opacity: 0.88;
+    opacity: 0.9;
   }
 }
 
-/* Trail body — full loop along the curve */
 @keyframes journey-route-spark {
   from {
     stroke-dashoffset: 1102;
@@ -2230,7 +2320,6 @@ mask-composite: exclude;
   }
 }
 
-/* Bright head — same speed, phased ahead so trail soft-fades behind */
 @keyframes journey-route-spark-head {
   from {
     stroke-dashoffset: 980;
@@ -2245,7 +2334,8 @@ mask-composite: exclude;
   .journey-route-bloom,
   .journey-route-line,
   .journey-route-spark,
-  .journey-route-spark-trail {
+  .journey-route-spark-trail,
+  .journey-beacon-active {
     animation: none !important;
   }
 
@@ -2261,5 +2351,9 @@ mask-composite: exclude;
 
   .journey-route-bloom {
     opacity: 0.85;
+  }
+
+  .journey-beacon-active {
+    transform: scale(1.18);
   }
 }

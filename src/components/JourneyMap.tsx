@@ -60,28 +60,37 @@ const stages = [
   },
 ]
 
+type StationStatus = 'completed' | 'active' | 'future'
+
+function stationStatus(index: number, activeStage: number): StationStatus {
+  if (index < activeStage) return 'completed'
+  if (index === activeStage) return 'active'
+  return 'future'
+}
+
 function StagePoint({
   stage,
-  active,
+  status,
+  isFinale,
   onActivate,
 }: {
   stage: (typeof stages)[0]
-  active: boolean
+  status: StationStatus
+  isFinale: boolean
   onActivate: () => void
 }) {
   return (
     <div className="relative flex flex-col items-center">
       <button
         type="button"
-        className={`journey-beacon group relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050914] ${
-          active
-            ? 'journey-beacon-active text-brand-sky'
-            : 'text-brand-sky/70'
+        className={`journey-beacon group relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6D2A2]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050914] journey-beacon-${status}${
+          isFinale ? ' journey-beacon-finale' : ''
         }`}
         onMouseEnter={onActivate}
         onFocus={onActivate}
         onClick={onActivate}
         aria-label={stage.title}
+        aria-current={status === 'active' ? 'step' : undefined}
       >
         {stage.icon}
         <span className="journey-beacon-num absolute -top-3 left-1/2 flex h-4 w-4 -translate-x-1/2 items-center justify-center text-[9px] tracking-widest">
@@ -91,7 +100,7 @@ function StagePoint({
 
       <div
         className={`journey-stage-caption mt-4 w-full max-w-[220px] rounded-2xl p-4 text-center transition-all duration-500 ${
-          active
+          status === 'active'
             ? 'opacity-100'
             : 'opacity-0 lg:pointer-events-none lg:absolute lg:mt-0 lg:top-14 lg:opacity-0'
         }`}
@@ -126,6 +135,13 @@ export default function JourneyMap() {
             <p className="mt-4 text-lg text-text-secondary">
               Каждый этап открывает новые возможности. Двигайтесь в своём темпе — от первых открытий до уверенного создания собственных AI-проектов.
             </p>
+
+            <div className="journey-progress mt-8" aria-live="polite">
+              <p className="journey-progress-label">Ваш путь</p>
+              <p className="journey-progress-stage">
+                Этап {activeStage + 1} из {stages.length}
+              </p>
+            </div>
           </div>
         </ScrollReveal>
 
@@ -140,30 +156,29 @@ export default function JourneyMap() {
             >
               <defs>
                 <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#E6D2A2" stopOpacity="0" />
-                  <stop offset="10%" stopColor="#E6D2A2" stopOpacity="0.14" />
-                  <stop offset="40%" stopColor="#E6D2A2" stopOpacity="0.28" />
-                  <stop offset="70%" stopColor="#E6D2A2" stopOpacity="0.24" />
-                  <stop offset="90%" stopColor="#E6D2A2" stopOpacity="0.14" />
-                  <stop offset="100%" stopColor="#E6D2A2" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#F0E3C0" stopOpacity="0" />
+                  <stop offset="12%" stopColor="#F0E3C0" stopOpacity="0.22" />
+                  <stop offset="38%" stopColor="#E6D2A2" stopOpacity="0.55" />
+                  <stop offset="68%" stopColor="#E6D2A2" stopOpacity="0.48" />
+                  <stop offset="88%" stopColor="#D9BE7A" stopOpacity="0.28" />
+                  <stop offset="100%" stopColor="#D9BE7A" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="routeGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#E6D2A2" stopOpacity="0" />
-                  <stop offset="14%" stopColor="#E6D2A2" stopOpacity="0.07" />
-                  <stop offset="45%" stopColor="#E6D2A2" stopOpacity="0.12" />
-                  <stop offset="78%" stopColor="#E6D2A2" stopOpacity="0.1" />
-                  <stop offset="92%" stopColor="#D9BE7A" stopOpacity="0.05" />
+                  <stop offset="0%" stopColor="#F0E3C0" stopOpacity="0" />
+                  <stop offset="16%" stopColor="#E6D2A2" stopOpacity="0.1" />
+                  <stop offset="45%" stopColor="#E6D2A2" stopOpacity="0.18" />
+                  <stop offset="78%" stopColor="#D9BE7A" stopOpacity="0.12" />
                   <stop offset="100%" stopColor="#D9BE7A" stopOpacity="0" />
                 </linearGradient>
                 <filter id="routeGlow" x="-40%" y="-400%" width="180%" height="900%">
-                  <feGaussianBlur stdDeviation="2.8" result="blur" />
+                  <feGaussianBlur stdDeviation="3.6" result="blur" />
                   <feMerge>
                     <feMergeNode in="blur" />
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
                 <filter id="routeBloom" x="-90%" y="-900%" width="280%" height="1800%">
-                  <feGaussianBlur stdDeviation="16" result="bloom" />
+                  <feGaussianBlur stdDeviation="18" result="bloom" />
                   <feMerge>
                     <feMergeNode in="bloom" />
                   </feMerge>
@@ -175,10 +190,10 @@ export default function JourneyMap() {
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
                 stroke="url(#routeGradSoft)"
-                strokeWidth="16"
+                strokeWidth="22"
                 strokeLinecap="round"
                 filter="url(#routeBloom)"
-                opacity="0.85"
+                opacity="0.9"
                 pathLength={1102}
               />
               <path
@@ -186,10 +201,10 @@ export default function JourneyMap() {
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
                 stroke="url(#routeGrad)"
-                strokeWidth="0.65"
+                strokeWidth="1.85"
                 strokeLinecap="round"
                 filter="url(#routeGlow)"
-                opacity="0.55"
+                opacity="0.82"
                 pathLength={1102}
               />
               {/* Light pulse + soft trail — same Bezier d, travels via stroke-dashoffset */}
@@ -198,7 +213,7 @@ export default function JourneyMap() {
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
                 stroke="#E6D2A2"
-                strokeWidth="2"
+                strokeWidth="2.2"
                 strokeLinecap="round"
                 pathLength={1102}
               />
@@ -206,8 +221,8 @@ export default function JourneyMap() {
                 className="journey-route-spark"
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
-                stroke="#E6D2A2"
-                strokeWidth="2.6"
+                stroke="#F0E3C0"
+                strokeWidth="2.8"
                 strokeLinecap="round"
                 pathLength={1102}
               />
@@ -218,7 +233,8 @@ export default function JourneyMap() {
                 <StagePoint
                   key={stage.id}
                   stage={stage}
-                  active={activeStage === i}
+                  status={stationStatus(i, activeStage)}
+                  isFinale={i === stages.length - 1}
                   onActivate={() => setActiveStage(i)}
                 />
               ))}
@@ -232,41 +248,44 @@ export default function JourneyMap() {
             <div className="journey-route-mobile absolute left-6 top-0 bottom-0 w-px" />
 
             <div className="space-y-8">
-              {stages.map((stage, i) => (
-                <div key={stage.id} className="relative flex gap-6 pl-2">
-                  <button
-                    type="button"
-                    className={`journey-beacon relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/25 ${
-                      activeStage === i
-                        ? 'journey-beacon-active text-brand-sky'
-                        : 'text-brand-sky/70'
-                    }`}
-                    onClick={() => setActiveStage(i)}
-                    aria-label={stage.title}
-                  >
-                    {stage.icon}
-                  </button>
-                  <div
-                    className={`journey-stage-caption flex-1 rounded-2xl p-4 transition-all duration-500 ${
-                      activeStage === i ? 'opacity-100' : 'opacity-65'
-                    }`}
-                    onClick={() => setActiveStage(i)}
-                    onKeyDown={(e) => e.key === 'Enter' && setActiveStage(i)}
-                    role="button"
-                    tabIndex={0}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span className="journey-beacon-num flex h-4 w-4 items-center justify-center text-[9px]">
-                        {stage.id}
-                      </span>
-                      <h3 className="font-semibold text-text-primary">{stage.title}</h3>
+              {stages.map((stage, i) => {
+                const status = stationStatus(i, activeStage)
+                const isFinale = i === stages.length - 1
+                return (
+                  <div key={stage.id} className="relative flex gap-6 pl-2">
+                    <button
+                      type="button"
+                      className={`journey-beacon relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6D2A2]/30 journey-beacon-${status}${
+                        isFinale ? ' journey-beacon-finale' : ''
+                      }`}
+                      onClick={() => setActiveStage(i)}
+                      aria-label={stage.title}
+                      aria-current={status === 'active' ? 'step' : undefined}
+                    >
+                      {stage.icon}
+                    </button>
+                    <div
+                      className={`journey-stage-caption flex-1 rounded-2xl p-4 transition-all duration-500 ${
+                        status === 'active' ? 'opacity-100' : 'opacity-65'
+                      }`}
+                      onClick={() => setActiveStage(i)}
+                      onKeyDown={(e) => e.key === 'Enter' && setActiveStage(i)}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="journey-beacon-num flex h-4 w-4 items-center justify-center text-[9px]">
+                          {stage.id}
+                        </span>
+                        <h3 className="font-semibold text-text-primary">{stage.title}</h3>
+                      </div>
+                      <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                        {stage.description}
+                      </p>
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                      {stage.description}
-                    </p>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </ScrollReveal>
