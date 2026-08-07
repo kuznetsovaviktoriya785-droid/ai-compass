@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { heroOrbits, heroParticles } from '../data/heroCompassData'
 import { useParallax } from '../hooks/useParallax'
-import CrystalSvg from './HeroCrystal'
+import HeroCrystal from './HeroCrystal'
 
 function ParallaxLayer({
   children,
@@ -129,8 +129,8 @@ export default function HeroCompass() {
           <div className="hero-compass relative flex h-[242px] w-[242px] items-center justify-center sm:h-[278px] sm:w-[278px] lg:h-[314px] lg:w-[314px]">
             <div className="hero-compass-disc absolute inset-0 rounded-full" />
 
-            <div className="absolute h-[76%] w-px bg-gradient-to-b from-transparent via-[#E0C894]/42 to-transparent" />
-            <div className="absolute h-px w-[76%] bg-gradient-to-r from-transparent via-[#E0C894]/36 to-transparent" />
+            <div className="hero-compass-cross hero-compass-cross-v absolute h-[76%] w-px bg-gradient-to-b from-transparent via-[#E0C894]/42 to-transparent" />
+            <div className="hero-compass-cross hero-compass-cross-h absolute h-px w-[76%] bg-gradient-to-r from-transparent via-[#E0C894]/36 to-transparent" />
 
             <div className="hero-compass-mark hero-compass-mark-n">N</div>
             <div className="hero-compass-mark hero-compass-mark-s">S</div>
@@ -139,11 +139,8 @@ export default function HeroCompass() {
 
             <div className="hero-crystal-wrap relative z-10">
               <div className="hero-crystal-float">
-                <div className="hero-crystal-rotate">
-                  <div className="hero-crystal">
-                    <CrystalSvg />
-                    <div className="hero-crystal-warm-core" />
-                  </div>
+                <div className="hero-crystal">
+                  <HeroCrystal />
                 </div>
               </div>
             </div>

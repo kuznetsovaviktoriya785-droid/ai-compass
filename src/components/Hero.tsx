@@ -41,6 +41,42 @@ const PARTICLES: Particle[] = [
   { id: 24, left: 43, top: 62, size: 1, opacity: 0.2, duration: 35, delay: 2.2 },
 ]
 
+type TwinkleStar = {
+  id: number
+  left: number
+  top: number
+  size: number
+  duration: number
+  delay: number
+  sparkle?: boolean
+  tone: 'ivory' | 'champagne' | 'white'
+}
+
+/**
+ * Rare living twinkles — clear of title/CTA (left mid) and compass (right mid).
+ * Placed along edges, upper band, and lower margins only.
+ */
+const TWINKLES: TwinkleStar[] = [
+  { id: 0, left: 6, top: 12, size: 2.2, duration: 7.2, delay: 0.4, tone: 'ivory', sparkle: true },
+  { id: 1, left: 18, top: 6, size: 1.6, duration: 9.1, delay: 2.1, tone: 'white' },
+  { id: 2, left: 32, top: 9, size: 1.4, duration: 8.4, delay: 4.8, tone: 'champagne' },
+  { id: 3, left: 48, top: 5, size: 2, duration: 10.2, delay: 1.2, tone: 'ivory', sparkle: true },
+  { id: 4, left: 63, top: 8, size: 1.5, duration: 7.8, delay: 5.6, tone: 'white' },
+  { id: 5, left: 78, top: 7, size: 1.8, duration: 9.6, delay: 0.9, tone: 'champagne' },
+  { id: 6, left: 93, top: 14, size: 2.4, duration: 8.8, delay: 3.3, tone: 'ivory', sparkle: true },
+  { id: 7, left: 3, top: 28, size: 1.5, duration: 11, delay: 6.2, tone: 'white' },
+  { id: 8, left: 97, top: 32, size: 1.7, duration: 8.1, delay: 1.8, tone: 'champagne' },
+  { id: 9, left: 8, top: 72, size: 1.6, duration: 9.4, delay: 4.1, tone: 'ivory' },
+  { id: 10, left: 22, top: 86, size: 2.1, duration: 10.8, delay: 2.7, tone: 'white', sparkle: true },
+  { id: 11, left: 38, top: 90, size: 1.4, duration: 7.5, delay: 7.4, tone: 'champagne' },
+  { id: 12, left: 55, top: 88, size: 1.9, duration: 9.9, delay: 0.2, tone: 'ivory' },
+  { id: 13, left: 74, top: 82, size: 1.5, duration: 8.6, delay: 5.1, tone: 'white' },
+  { id: 14, left: 91, top: 78, size: 2.3, duration: 11.4, delay: 3.9, tone: 'champagne', sparkle: true },
+  { id: 15, left: 96, top: 54, size: 1.4, duration: 7.9, delay: 8.2, tone: 'ivory' },
+  { id: 16, left: 2, top: 48, size: 1.3, duration: 10.5, delay: 4.6, tone: 'white' },
+  { id: 17, left: 44, top: 16, size: 1.5, duration: 8.9, delay: 6.8, tone: 'champagne' },
+]
+
 function HeroCursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -134,7 +170,11 @@ function HeroCursorTrail() {
 
 export default function Hero() {
   return (
-    <section className="hero-scene relative">
+    <section className="hero-scene hero-scene--awaken relative">
+      <div
+        className="hero-scene-curtain pointer-events-none fixed inset-0 z-[100]"
+        aria-hidden="true"
+      />
       <HeroCursorTrail />
 
       <div
@@ -148,6 +188,28 @@ export default function Hero() {
       />
 
       <HeroStarfield />
+
+      <div
+        className="hero-scene-twinkles pointer-events-none absolute inset-0 z-[1]"
+        aria-hidden="true"
+      >
+        {TWINKLES.map((star) => (
+          <span
+            key={star.id}
+            className={`hero-scene-twinkle hero-scene-twinkle--${star.tone}${
+              star.sparkle ? ' hero-scene-twinkle--sparkle' : ''
+            }`}
+            style={{
+              left: `${star.left}%`,
+              top: `${star.top}%`,
+              width: star.size,
+              height: star.size,
+              animationDuration: `${star.duration}s`,
+              animationDelay: `${star.delay}s`,
+            }}
+          />
+        ))}
+      </div>
 
       <div
         className="hero-scene-starfield-parallax pointer-events-none absolute inset-0"

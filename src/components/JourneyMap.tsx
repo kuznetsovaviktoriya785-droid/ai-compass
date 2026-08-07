@@ -9,8 +9,8 @@ const stages = [
     description:
       'Откройте для себя мир искусственного интеллекта. Узнайте, как работают современные AI-технологии и с чего начать своё путешествие.',
     icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
     ),
   },
@@ -20,8 +20,8 @@ const stages = [
     description:
       'Научитесь общаться с искусственным интеллектом. Освойте создание точных промптов и получайте результаты, которые действительно работают.',
     icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
       </svg>
     ),
   },
@@ -31,8 +31,8 @@ const stages = [
     description:
       'Используйте возможности AI для анализа информации, поиска закономерностей и принятия более уверенных решений.',
     icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
       </svg>
     ),
   },
@@ -42,8 +42,8 @@ const stages = [
     description:
       'Автоматизируйте повседневные задачи, экспериментируйте с новыми инструментами и открывайте возможности для роста.',
     icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
     ),
   },
@@ -53,8 +53,8 @@ const stages = [
     description:
       'Создавайте собственные AI-проекты, воплощайте идеи в жизнь и открывайте новые горизонты вместе с искусственным интеллектом.',
     icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
       </svg>
     ),
   },
@@ -128,15 +128,15 @@ export default function JourneyMap() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="journey-title text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="journey-title text-3xl font-semibold tracking-tight sm:text-4xl">
               Ваш маршрут по миру{' '}
               <span className="text-gradient">искусственного интеллекта</span>
             </h2>
-            <p className="mt-4 text-lg text-text-secondary">
+            <p className="journey-subtitle mt-7 text-lg text-text-secondary">
               Каждый этап открывает новые возможности. Двигайтесь в своём темпе — от первых открытий до уверенного создания собственных AI-проектов.
             </p>
 
-            <div className="journey-progress mt-8" aria-live="polite">
+            <div className="journey-progress mt-9" aria-live="polite">
               <p className="journey-progress-label">Ваш путь</p>
               <p className="journey-progress-stage">
                 Этап {activeStage + 1} из {stages.length}
@@ -156,44 +156,45 @@ export default function JourneyMap() {
             >
               <defs>
                 <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#F0E3C0" stopOpacity="0" />
-                  <stop offset="12%" stopColor="#F0E3C0" stopOpacity="0.22" />
-                  <stop offset="38%" stopColor="#E6D2A2" stopOpacity="0.55" />
-                  <stop offset="68%" stopColor="#E6D2A2" stopOpacity="0.48" />
-                  <stop offset="88%" stopColor="#D9BE7A" stopOpacity="0.28" />
-                  <stop offset="100%" stopColor="#D9BE7A" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#F7E9BB" stopOpacity="0" />
+                  <stop offset="10%" stopColor="#F7E9BB" stopOpacity="0.28" />
+                  <stop offset="36%" stopColor="#E6D2A2" stopOpacity="0.62" />
+                  <stop offset="66%" stopColor="#DCC38A" stopOpacity="0.5" />
+                  <stop offset="88%" stopColor="#B8944F" stopOpacity="0.26" />
+                  <stop offset="100%" stopColor="#B8944F" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="routeGradSoft" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#F0E3C0" stopOpacity="0" />
-                  <stop offset="16%" stopColor="#E6D2A2" stopOpacity="0.1" />
-                  <stop offset="45%" stopColor="#E6D2A2" stopOpacity="0.18" />
-                  <stop offset="78%" stopColor="#D9BE7A" stopOpacity="0.12" />
-                  <stop offset="100%" stopColor="#D9BE7A" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#F7E9BB" stopOpacity="0" />
+                  <stop offset="18%" stopColor="#E6D2A2" stopOpacity="0.1" />
+                  <stop offset="48%" stopColor="#E6D2A2" stopOpacity="0.16" />
+                  <stop offset="80%" stopColor="#DCC38A" stopOpacity="0.1" />
+                  <stop offset="100%" stopColor="#B8944F" stopOpacity="0" />
                 </linearGradient>
                 <filter id="routeGlow" x="-40%" y="-400%" width="180%" height="900%">
-                  <feGaussianBlur stdDeviation="3.6" result="blur" />
+                  <feGaussianBlur stdDeviation="3.4" result="blur" />
                   <feMerge>
                     <feMergeNode in="blur" />
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
-                <filter id="routeBloom" x="-90%" y="-900%" width="280%" height="1800%">
-                  <feGaussianBlur stdDeviation="18" result="bloom" />
+                {/* Narrow local halo — not a wide milky band */}
+                <filter id="routeBloom" x="-20%" y="-120%" width="140%" height="340%">
+                  <feGaussianBlur stdDeviation="4.5" result="bloom" />
                   <feMerge>
                     <feMergeNode in="bloom" />
                   </feMerge>
                 </filter>
               </defs>
-              {/* Continuous cosmic energy stream — soft orbital flow, stages unmoved */}
+              {/* Soft local bloom only — same Bezier, tight champagne halo */}
               <path
                 className="journey-route-bloom"
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
                 stroke="url(#routeGradSoft)"
-                strokeWidth="22"
+                strokeWidth="5"
                 strokeLinecap="round"
                 filter="url(#routeBloom)"
-                opacity="0.9"
+                opacity="0.7"
                 pathLength={1102}
               />
               <path
@@ -201,10 +202,20 @@ export default function JourneyMap() {
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
                 stroke="url(#routeGrad)"
-                strokeWidth="1.85"
+                strokeWidth="1.7"
                 strokeLinecap="round"
                 filter="url(#routeGlow)"
-                opacity="0.82"
+                opacity="0.88"
+                pathLength={1102}
+              />
+              <path
+                className="journey-route-core"
+                d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                fill="none"
+                stroke="#F7E9BB"
+                strokeWidth="0.55"
+                strokeLinecap="round"
+                opacity="0.7"
                 pathLength={1102}
               />
               {/* Light pulse + soft trail — same Bezier d, travels via stroke-dashoffset */}
@@ -213,7 +224,7 @@ export default function JourneyMap() {
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
                 stroke="#E6D2A2"
-                strokeWidth="2.2"
+                strokeWidth="2"
                 strokeLinecap="round"
                 pathLength={1102}
               />
@@ -221,11 +232,36 @@ export default function JourneyMap() {
                 className="journey-route-spark"
                 d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 fill="none"
-                stroke="#F0E3C0"
-                strokeWidth="2.8"
+                stroke="#F7E9BB"
+                strokeWidth="2.6"
                 strokeLinecap="round"
                 pathLength={1102}
               />
+              {/* Tiny motes riding the same curve */}
+              <circle className="journey-route-mote" r="1.15" fill="#F7E9BB">
+                <animateMotion
+                  dur="38s"
+                  repeatCount="indefinite"
+                  begin="3.2s"
+                  path="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                />
+              </circle>
+              <circle className="journey-route-mote" r="0.85" fill="#E6D2A2">
+                <animateMotion
+                  dur="44s"
+                  repeatCount="indefinite"
+                  begin="8s"
+                  path="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                />
+              </circle>
+              <circle className="journey-route-mote" r="0.7" fill="#DCC38A">
+                <animateMotion
+                  dur="50s"
+                  repeatCount="indefinite"
+                  begin="14s"
+                  path="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                />
+              </circle>
             </svg>
 
             <div className="relative grid grid-cols-5 gap-4 sm:gap-5">
@@ -290,7 +326,7 @@ export default function JourneyMap() {
           </div>
         </ScrollReveal>
 
-        <p className="mt-12 text-center text-sm text-text-secondary sm:mt-14">
+        <p className="journey-closing mt-14 text-center sm:mt-16">
           Ваше путешествие только начинается.
         </p>
       </div>

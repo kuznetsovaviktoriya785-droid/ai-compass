@@ -1,9 +1,8 @@
 import { useLayoutEffect, useRef } from 'react'
 
 /**
- * Deep-space starfield for the journey section — same star language as the
- * hero, with a calm corridor around the title and the route so the light
- * path stays readable.
+ * Deep-space starfield for the journey section — layered depth, calm
+ * corridor around the title/route, optional slow twinkle on rare stars.
  */
 export default function JourneyStarfield() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -19,10 +18,35 @@ export default function JourneyStarfield() {
       return (s - 1) / 2147483646
     }
 
-    const draw = () => {
+    type Star = {
+      x: number
+      y: number
+      r: number
+      a: number
+      fill: string
+      bloom: boolean
+      twinkle: number
+    }
+
+    let stars: Star[] = []
+    let w = 0
+    let h = 0
+    let raf = 0
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const densityAt = (x: number, y: number, width: number, height: number) => {
+      const nx = x / width
+      const ny = y / height
+      /* Light title clearance only — keep stars dense behind the route band */
+      const corridor = ny > 0.2 && ny < 0.38 ? 1 - (nx > 0.18 && nx < 0.82 ? 0.35 : 0.12) : 1
+      const edgeLift = ny < 0.12 || ny > 0.86 ? 1 : 0.9
+      return corridor * edgeLift
+    }
+
+    const rebuild = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      const w = host.clientWidth
-      const h = host.clientHeight
+      w = host.clientWidth
+      h = host.clientHeight
       if (!w || !h) return
 
       canvas.width = Math.floor(w * dpr)
@@ -30,18 +54,64 @@ export default function JourneyStarfield() {
       canvas.style.width = `${w}px`
       canvas.style.height = `${h}px`
 
+      const layers = [
+        { n: 3200, size: [0.15, 0.38], a: [0.025, 0.08], near: false },
+        { n: 1400, size: [0.25, 0.65], a: [0.05, 0.14], near: false },
+        { n: 420, size: [0.38, 0.95], a: [0.09, 0.24], near: false },
+        { n: 55, size: [0.9, 1.75], a: [0.3, 0.55], near: true },
+      ]
+
+      stars = []
+      s = 41
+      for (const layer of layers) {
+        for (let i = 0; i < layer.n; i++) {
+          const x = next() * w
+          const y = next() * h
+          const dens = densityAt(x, y, w, h)
+          if (next() > dens) continue
+
+          const r = layer.size[0] + next() * (layer.size[1] - layer.size[0])
+          let a = layer.a[0] + next() * (layer.a[1] - layer.a[0])
+          a *= 0.55 + dens * 0.45
+
+          const roll = next()
+          const fill = layer.near
+            ? roll < 0.4
+              ? `255,248,235`
+              : `247,233,187`
+            : roll < 0.07
+              ? `247,233,187`
+              : roll > 0.93
+                ? `230,210,162`
+                : `236,232,224`
+
+          stars.push({
+            x,
+            y,
+            r,
+            a,
+            fill,
+            bloom: layer.near && r > 1.05,
+            twinkle: layer.near && next() > 0.55 ? 0.35 + next() * 0.65 : 0,
+          })
+        }
+      }
+    }
+
+    const paint = (time: number) => {
       const ctx = canvas.getContext('2d')
-      if (!ctx) return
+      if (!ctx || !w || !h) return
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, w, h)
 
-      // Quiet distant navy / cosmic haze — kept away from the centre
       const washes = [
-        { x: 0.1, y: 0.3, rx: 0.3, ry: 0.34, c: 'rgba(28,48,88,0.055)' },
-        { x: 0.9, y: 0.36, rx: 0.28, ry: 0.32, c: 'rgba(22,40,72,0.05)' },
-        { x: 0.24, y: 0.86, rx: 0.3, ry: 0.28, c: 'rgba(26,44,78,0.045)' },
-        { x: 0.78, y: 0.9, rx: 0.26, ry: 0.24, c: 'rgba(40,36,58,0.03)' },
-        { x: 0.5, y: 0.12, rx: 0.42, ry: 0.18, c: 'rgba(18,32,58,0.035)' },
+        { x: 0.08, y: 0.28, rx: 0.34, ry: 0.38, c: 'rgba(20,38,72,0.07)' },
+        { x: 0.92, y: 0.34, rx: 0.32, ry: 0.36, c: 'rgba(18,34,64,0.06)' },
+        { x: 0.22, y: 0.88, rx: 0.34, ry: 0.3, c: 'rgba(24,42,78,0.05)' },
+        { x: 0.8, y: 0.9, rx: 0.28, ry: 0.26, c: 'rgba(36,32,58,0.035)' },
+        { x: 0.5, y: 0.1, rx: 0.46, ry: 0.2, c: 'rgba(14,28,52,0.045)' },
+        { x: 0.62, y: 0.55, rx: 0.22, ry: 0.18, c: 'rgba(22,36,62,0.025)' },
       ]
       for (const wash of washes) {
         const g = ctx.createRadialGradient(
@@ -60,66 +130,49 @@ export default function JourneyStarfield() {
         ctx.fill()
       }
 
-      // Sparse corridor across the middle where the title and route live
-      const densityAt = (x: number, y: number) => {
-        const nx = x / w
-        const ny = y / h
-        const corridor = ny > 0.18 && ny < 0.62 ? 1 - (nx > 0.12 && nx < 0.88 ? 0.72 : 0.3) : 1
-        const edgeLift = ny < 0.12 || ny > 0.86 ? 1 : 0.86
-        return corridor * edgeLift
-      }
+      const t = time * 0.001
+      for (const star of stars) {
+        let a = star.a
+        if (!reduceMotion && star.twinkle > 0) {
+          a *= 0.72 + 0.28 * (0.5 + 0.5 * Math.sin(t * (0.22 + star.twinkle * 0.18) + star.x))
+        }
 
-      // Far → near depth planes (dim distant, brighter near)
-      const layers = [
-        { n: 2600, size: [0.18, 0.42], a: [0.03, 0.1], near: false },
-        { n: 1300, size: [0.28, 0.7], a: [0.06, 0.18], near: false },
-        { n: 480, size: [0.4, 1.05], a: [0.1, 0.28], near: false },
-        { n: 70, size: [0.85, 1.7], a: [0.28, 0.52], near: true },
-      ]
-
-      s = 41
-      for (const layer of layers) {
-        for (let i = 0; i < layer.n; i++) {
-          const x = next() * w
-          const y = next() * h
-          const dens = densityAt(x, y)
-          if (next() > dens) continue
-
-          const r = layer.size[0] + next() * (layer.size[1] - layer.size[0])
-          let a = layer.a[0] + next() * (layer.a[1] - layer.a[0])
-          a *= 0.55 + dens * 0.45
-
-          const roll = next()
-          const fill = layer.near
-            ? roll < 0.35
-              ? `rgba(255,248,235,${a})`
-              : `rgba(240,227,192,${a})`
-            : roll < 0.08
-              ? `rgba(255,232,196,${a * 0.85})`
-              : roll > 0.92
-                ? `rgba(230,210,162,${a * 0.9})`
-                : `rgba(230,235,245,${a * 0.75})`
-
-          if (layer.near && r > 1.05) {
-            ctx.beginPath()
-            ctx.fillStyle = `rgba(240,227,192,${a * 0.12})`
-            ctx.arc(x, y, r * 2.8, 0, Math.PI * 2)
-            ctx.fill()
-          }
-
+        if (star.bloom) {
           ctx.beginPath()
-          ctx.fillStyle = fill
-          ctx.arc(x, y, r, 0, Math.PI * 2)
+          ctx.fillStyle = `rgba(247,233,187,${a * 0.1})`
+          ctx.arc(star.x, star.y, star.r * 2.8, 0, Math.PI * 2)
           ctx.fill()
         }
+
+        ctx.beginPath()
+        ctx.fillStyle = `rgba(${star.fill},${a})`
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      if (!reduceMotion) {
+        raf = requestAnimationFrame(paint)
       }
     }
 
-    draw()
+    const onResize = () => {
+      rebuild()
+      if (reduceMotion) paint(0)
+    }
 
-    const observer = new ResizeObserver(draw)
+    rebuild()
+    if (reduceMotion) {
+      paint(0)
+    } else {
+      raf = requestAnimationFrame(paint)
+    }
+
+    const observer = new ResizeObserver(onResize)
     observer.observe(host)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(raf)
+    }
   }, [])
 
   return (

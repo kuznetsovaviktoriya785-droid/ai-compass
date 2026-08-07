@@ -14,7 +14,7 @@ export default function ScrollReveal({ children, className = '', delay = 0 }: Sc
     <div
       ref={ref}
       className={`reveal ${visible ? 'visible' : ''} ${className}`}
-      style={visible ? { transitionDelay: `${delay}ms` } : undefined}
+      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
     </div>
