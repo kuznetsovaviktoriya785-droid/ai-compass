@@ -72,18 +72,20 @@ function StagePoint({
   stage,
   status,
   isFinale,
+  stationIndex,
   onActivate,
 }: {
   stage: (typeof stages)[0]
   status: StationStatus
   isFinale: boolean
+  stationIndex: number
   onActivate: () => void
 }) {
   return (
     <div className="relative flex flex-col items-center">
       <button
         type="button"
-        className={`journey-beacon group relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6D2A2]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050914] journey-beacon-${status}${
+        className={`journey-beacon group relative z-10 flex h-12 w-12 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6D2A2]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050914] journey-beacon-${status}${
           isFinale ? ' journey-beacon-finale' : ''
         }`}
         onMouseEnter={onActivate}
@@ -92,6 +94,13 @@ function StagePoint({
         aria-label={stage.title}
         aria-current={status === 'active' ? 'step' : undefined}
       >
+        {/* Brief pass-through kiss — does not change permanent station look */}
+        <span
+          className={`journey-beacon-kiss journey-beacon-kiss-${stationIndex}${
+            isFinale ? ' journey-beacon-kiss-finale' : ''
+          }`}
+          aria-hidden="true"
+        />
         {stage.icon}
         <span className="journey-beacon-num absolute -top-3 left-1/2 flex h-4 w-4 -translate-x-1/2 items-center justify-center text-[9px] tracking-widest">
           {stage.id}
@@ -99,11 +108,7 @@ function StagePoint({
       </button>
 
       <div
-        className={`journey-stage-caption mt-4 w-full max-w-[220px] rounded-2xl p-4 text-center transition-all duration-500 ${
-          status === 'active'
-            ? 'opacity-100'
-            : 'opacity-0 lg:pointer-events-none lg:absolute lg:mt-0 lg:top-14 lg:opacity-0'
-        }`}
+        className={`journey-stage-caption mt-4 w-full max-w-[220px] rounded-2xl p-4 text-center journey-stage-caption-${status}`}
       >
         <h3 className="text-sm font-semibold text-text-primary">{stage.title}</h3>
         <p className="mt-1.5 text-xs leading-relaxed text-text-secondary">{stage.description}</p>
@@ -184,6 +189,27 @@ export default function JourneyMap() {
                     <feMergeNode in="bloom" />
                   </feMerge>
                 </filter>
+                {/* Tight comet halo — local only, not a wide blotch */}
+                <filter id="cometHalo" x="-150%" y="-150%" width="400%" height="400%">
+                  <feGaussianBlur stdDeviation="2.1" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <linearGradient
+                  id="cometWakeGrad"
+                  gradientUnits="userSpaceOnUse"
+                  x1="0"
+                  y1="0"
+                  x2="-16"
+                  y2="0"
+                >
+                  <stop offset="0%" stopColor="#FFFEF8" stopOpacity="0.92" />
+                  <stop offset="20%" stopColor="#E6D2A2" stopOpacity="0.4" />
+                  <stop offset="52%" stopColor="#DCC38A" stopOpacity="0.12" />
+                  <stop offset="100%" stopColor="#B8944F" stopOpacity="0" />
+                </linearGradient>
               </defs>
               {/* Soft local bloom only — same Bezier, tight champagne halo */}
               <path
@@ -218,27 +244,47 @@ export default function JourneyMap() {
                 opacity="0.7"
                 pathLength={1102}
               />
-              {/* Light pulse + soft trail — same Bezier d, travels via stroke-dashoffset */}
-              <path
-                className="journey-route-spark-trail"
-                d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
-                fill="none"
-                stroke="#E6D2A2"
-                strokeWidth="2"
-                strokeLinecap="round"
-                pathLength={1102}
-              />
-              <path
-                className="journey-route-spark"
-                d="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
-                fill="none"
-                stroke="#F7E9BB"
-                strokeWidth="2.6"
-                strokeLinecap="round"
-                pathLength={1102}
-              />
-              {/* Tiny motes riding the same curve */}
-              <circle className="journey-route-mote" r="1.15" fill="#F7E9BB">
+              {/* Living energy particle — larger nucleus (~1.85×) + airy halo + short wake */}
+              <g className="journey-route-comet">
+                <ellipse
+                  className="journey-route-comet-wake"
+                  cx="-8"
+                  cy="0"
+                  rx="9"
+                  ry="0.7"
+                  fill="url(#cometWakeGrad)"
+                />
+                <ellipse
+                  className="journey-route-comet-wake-core"
+                  cx="-3.4"
+                  cy="0"
+                  rx="3.6"
+                  ry="0.5"
+                  fill="#E6D2A2"
+                />
+                <circle
+                  className="journey-route-comet-halo-outer"
+                  r="5.6"
+                  fill="#DCC38A"
+                />
+                <circle
+                  className="journey-route-comet-halo"
+                  r="3.4"
+                  fill="#E6D2A2"
+                  filter="url(#cometHalo)"
+                />
+                <circle className="journey-route-comet-core" r="2.15" fill="#FFFEF8" />
+                <circle className="journey-route-comet-core-hot" r="0.85" fill="#FFFFFF" />
+                <animateMotion
+                  dur="38s"
+                  repeatCount="indefinite"
+                  begin="2.9s"
+                  rotate="auto"
+                  path="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
+                />
+              </g>
+              {/* Rare microscopic wake motes — sparse, not a spark stream */}
+              <circle className="journey-route-mote journey-route-mote-1" r="0.35" fill="#F7E9BB">
                 <animateMotion
                   dur="38s"
                   repeatCount="indefinite"
@@ -246,19 +292,19 @@ export default function JourneyMap() {
                   path="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 />
               </circle>
-              <circle className="journey-route-mote" r="0.85" fill="#E6D2A2">
+              <circle className="journey-route-mote journey-route-mote-2" r="0.28" fill="#E6D2A2">
                 <animateMotion
-                  dur="44s"
+                  dur="38s"
                   repeatCount="indefinite"
-                  begin="8s"
+                  begin="3.35s"
                   path="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 />
               </circle>
-              <circle className="journey-route-mote" r="0.7" fill="#DCC38A">
+              <circle className="journey-route-mote journey-route-mote-3" r="0.22" fill="#DCC38A">
                 <animateMotion
-                  dur="50s"
+                  dur="38s"
                   repeatCount="indefinite"
-                  begin="14s"
+                  begin="3.5s"
                   path="M -50 70 C 180 46, 340 46, 520 64 C 700 82, 860 82, 1050 58"
                 />
               </circle>
@@ -271,6 +317,7 @@ export default function JourneyMap() {
                   stage={stage}
                   status={stationStatus(i, activeStage)}
                   isFinale={i === stages.length - 1}
+                  stationIndex={i}
                   onActivate={() => setActiveStage(i)}
                 />
               ))}
@@ -291,7 +338,7 @@ export default function JourneyMap() {
                   <div key={stage.id} className="relative flex gap-6 pl-2">
                     <button
                       type="button"
-                      className={`journey-beacon relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6D2A2]/30 journey-beacon-${status}${
+                      className={`journey-beacon relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6D2A2]/30 journey-beacon-${status}${
                         isFinale ? ' journey-beacon-finale' : ''
                       }`}
                       onClick={() => setActiveStage(i)}
@@ -301,9 +348,7 @@ export default function JourneyMap() {
                       {stage.icon}
                     </button>
                     <div
-                      className={`journey-stage-caption flex-1 rounded-2xl p-4 transition-all duration-500 ${
-                        status === 'active' ? 'opacity-100' : 'opacity-65'
-                      }`}
+                      className={`journey-stage-caption journey-stage-caption-mobile flex-1 rounded-2xl p-4 journey-stage-caption-${status}`}
                       onClick={() => setActiveStage(i)}
                       onKeyDown={(e) => e.key === 'Enter' && setActiveStage(i)}
                       role="button"
