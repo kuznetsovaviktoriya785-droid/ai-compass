@@ -6,6 +6,7 @@ import About from './components/About'
 import Features from './components/Features'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
+import Aster from './components/Aster'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
       </main>
   
       <Footer />
+      <Aster />
     </div>
   )
 }
