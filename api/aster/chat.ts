@@ -15,7 +15,7 @@ const SYSTEM_PROMPT = [
   'Отвечай по-русски, кратко и ясно.',
 ].join(' ')
 
-const GEMINI_MODEL = 'gemini-2.0-flash'
+const GEMINI_MODEL = 'gemini-2.5-flash-lite'
 
 function isChatMessage(value: unknown): value is ChatMessage {
   if (!value || typeof value !== 'object') return false
