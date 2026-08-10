@@ -15,6 +15,8 @@ const SYSTEM_PROMPT = [
   'Отвечай по-русски, кратко и ясно.',
 ].join(' ')
 
+const GEMINI_MODEL = 'gemini-2.0-flash'
+
 function isChatMessage(value: unknown): value is ChatMessage {
   if (!value || typeof value !== 'object') return false
   const message = value as ChatMessage
@@ -25,13 +27,20 @@ function isChatMessage(value: unknown): value is ChatMessage {
   )
 }
 
+function toGeminiContents(messages: ChatMessage[]) {
+  return messages.map((message) => ({
+    role: message.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: message.content }],
+  }))
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
     return res.status(405).json({ error: 'Метод не поддерживается.' })
   }
 
-  const apiKey = process.env.OPENAI_API_KEY
+  const apiKey = process.env.GEMINI_API_KEY
   if (!apiKey) {
     return res.status(500).json({ error: 'Aster временно недоступен.' })
   }
@@ -47,30 +56,44 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const openAiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+    const endpoint =
+      `https://generativelanguage.googleapis.com/v1beta/models/` +
+      `${GEMINI_MODEL}:generateContent`
+
+    const geminiResponse = await fetch(endpoint, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        temperature: 0.7,
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+        systemInstruction: {
+          parts: [{ text: SYSTEM_PROMPT }],
+        },
+        contents: toGeminiContents(messages),
+        generationConfig: {
+          temperature: 0.7,
+        },
       }),
     })
 
-    const data = (await openAiResponse.json()) as {
+    const data = (await geminiResponse.json()) as {
       error?: { message?: string }
-      choices?: Array<{ message?: { content?: string } }>
+      candidates?: Array<{
+        content?: { parts?: Array<{ text?: string }> }
+      }>
     }
 
-    if (!openAiResponse.ok) {
-      console.error('OpenAI error:', data?.error?.message ?? openAiResponse.status)
+    if (!geminiResponse.ok) {
+      console.error('Gemini error:', data?.error?.message ?? geminiResponse.status)
       return res.status(502).json({ error: 'Не удалось получить ответ от Aster.' })
     }
 
-    const reply = data.choices?.[0]?.message?.content?.trim()
+    const reply = data.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text ?? '')
+      .join('')
+      .trim()
+
     if (!reply) {
       return res.status(502).json({ error: 'Aster не вернул ответ.' })
     }
