@@ -4502,6 +4502,7 @@ mask-composite: exclude;
 
 .aster-panel-actions {
   display: grid;
+  flex: 0 0 auto;
   grid-template-columns: 1fr 1fr;
   gap: 0.55rem;
 }

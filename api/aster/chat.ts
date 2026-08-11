@@ -16,6 +16,7 @@ const SYSTEM_PROMPT = [
 ].join(' ')
 
 const GEMINI_MODEL = 'gemini-3.5-flash-lite'
+const CONTEXT_LIMIT = 12
 
 function isChatMessage(value: unknown): value is ChatMessage {
   if (!value || typeof value !== 'object') return false
@@ -28,10 +29,23 @@ function isChatMessage(value: unknown): value is ChatMessage {
 }
 
 function toGeminiContents(messages: ChatMessage[]) {
-  return messages.map((message) => ({
-    role: message.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: message.content }],
-  }))
+  const contents: Array<{ role: 'user' | 'model'; parts: Array<{ text: string }> }> = []
+
+  for (const message of messages) {
+    const role = message.role === 'assistant' ? 'model' : 'user'
+    const last = contents[contents.length - 1]
+    if (last && last.role === role) {
+      last.parts[0].text += `\n${message.content}`
+      continue
+    }
+    contents.push({ role, parts: [{ text: message.content }] })
+  }
+
+  while (contents.length > 0 && contents[0].role !== 'user') {
+    contents.shift()
+  }
+
+  return contents
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -50,8 +64,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Добавьте сообщение для Aster.' })
   }
 
-  const messages = rawMessages.filter(isChatMessage).slice(-20)
+  const messages = rawMessages.filter(isChatMessage).slice(-CONTEXT_LIMIT)
   if (messages.length === 0) {
+    return res.status(400).json({ error: 'Добавьте сообщение для Aster.' })
+  }
+
+  const contents = toGeminiContents(messages)
+  if (contents.length === 0) {
     return res.status(400).json({ error: 'Добавьте сообщение для Aster.' })
   }
 
@@ -70,7 +89,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         systemInstruction: {
           parts: [{ text: SYSTEM_PROMPT }],
         },
-        contents: toGeminiContents(messages),
+        contents,
         generationConfig: {
           temperature: 0.7,
         },

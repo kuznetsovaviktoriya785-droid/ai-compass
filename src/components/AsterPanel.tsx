@@ -20,6 +20,7 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const threadRef = useRef<HTMLDivElement>(null)
+  const hasUserMessage = messages.some((message) => message.role === 'user')
 
   useEffect(() => {
     if (!open) setExpanded(false)
@@ -174,22 +175,7 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
           Я Aster. Помогу увидеть, куда двигаться дальше.
         </p>
 
-        {messages.length === 0 && !loading ? (
-          <div className="aster-panel-empty" aria-hidden="true">
-            <svg
-              className="aster-panel-empty-star"
-              viewBox="0 0 24 24"
-              width="14"
-              height="14"
-            >
-              <path
-                d="M12 3.2 L12.9 10.1 L20 12 L12.9 13.9 L12 20.8 L11.1 13.9 L4 12 L11.1 10.1 Z"
-                fill="currentColor"
-              />
-            </svg>
-            <span>С чего начнём?</span>
-          </div>
-        ) : (
+        {hasUserMessage ? (
           <div className="aster-panel-thread" aria-live="polite">
             {messages.map((message, index) => (
               <p
@@ -205,23 +191,39 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
               </p>
             ) : null}
           </div>
+        ) : (
+          <>
+            <div className="aster-panel-empty" aria-hidden="true">
+              <svg
+                className="aster-panel-empty-star"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+              >
+                <path
+                  d="M12 3.2 L12.9 10.1 L20 12 L12.9 13.9 L12 20.8 L11.1 13.9 L4 12 L11.1 10.1 Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>С чего начнём?</span>
+            </div>
+            <div className="aster-panel-actions">
+              {QUICK_ACTIONS.map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  className="aster-panel-action"
+                  disabled={loading}
+                  onClick={() => void sendMessage(label)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </>
         )}
 
         {error ? <p className="aster-panel-error">{error}</p> : null}
-
-        <div className="aster-panel-actions">
-          {QUICK_ACTIONS.map((label) => (
-            <button
-              key={label}
-              type="button"
-              className="aster-panel-action"
-              disabled={loading}
-              onClick={() => void sendMessage(label)}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
       </div>
 
       <form className="aster-panel-composer" onSubmit={onSubmit}>
