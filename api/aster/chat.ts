@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 type ChatRole = 'user' | 'assistant'
@@ -15,8 +17,40 @@ const SYSTEM_PROMPT = [
   'Отвечай по-русски, кратко и ясно.',
 ].join(' ')
 
-const GEMINI_MODEL = 'gemini-3.5-flash-lite'
-const CONTEXT_LIMIT = 12
+const GEMINI_MODEL = 'gemini-3-flash-preview'
+const CONTEXT_LIMIT = 6
+
+function loadLocalGeminiKey() {
+  if (process.env.GEMINI_API_KEY) return
+
+  for (const file of ['.env.local', '.env']) {
+    const path = resolve(process.cwd(), file)
+    if (!existsSync(path)) continue
+
+    for (const line of readFileSync(path, 'utf8').split(/\r?\n/)) {
+      const trimmed = line.trim()
+      if (!trimmed || trimmed.startsWith('#')) continue
+      const separator = trimmed.indexOf('=')
+      if (separator === -1) continue
+
+      const name = trimmed.slice(0, separator).trim()
+      if (name !== 'GEMINI_API_KEY') continue
+
+      let value = trimmed.slice(separator + 1).trim()
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1)
+      }
+
+      if (value) {
+        process.env.GEMINI_API_KEY = value
+        return
+      }
+    }
+  }
+}
 
 function isChatMessage(value: unknown): value is ChatMessage {
   if (!value || typeof value !== 'object') return false
@@ -54,6 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Метод не поддерживается.' })
   }
 
+  loadLocalGeminiKey()
   const apiKey = process.env.GEMINI_API_KEY
   if (!apiKey) {
     return res.status(500).json({ error: 'Aster временно недоступен.' })

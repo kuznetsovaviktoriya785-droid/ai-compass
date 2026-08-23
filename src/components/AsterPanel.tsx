@@ -1,4 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
+import Markdown from 'react-markdown'
+import remarkBreaks from 'remark-breaks'
 import { sendAsterChat, type AsterChatMessage } from '../lib/asterChat'
 
 const QUICK_ACTIONS = [
@@ -177,14 +179,25 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
 
         {hasUserMessage ? (
           <div className="aster-panel-thread" aria-live="polite">
-            {messages.map((message, index) => (
-              <p
-                key={`${message.role}-${index}`}
-                className={`aster-panel-message aster-panel-message--${message.role}`}
-              >
-                {message.content}
-              </p>
-            ))}
+            {messages.map((message, index) =>
+              message.role === 'assistant' ? (
+                <div
+                  key={`${message.role}-${index}`}
+                  className="aster-panel-message aster-panel-message--assistant"
+                >
+                  <Markdown skipHtml remarkPlugins={[remarkBreaks]}>
+                    {message.content}
+                  </Markdown>
+                </div>
+              ) : (
+                <p
+                  key={`${message.role}-${index}`}
+                  className={`aster-panel-message aster-panel-message--${message.role}`}
+                >
+                  {message.content}
+                </p>
+              ),
+            )}
             {loading ? (
               <p className="aster-panel-message aster-panel-message--status">
                 Aster думает…

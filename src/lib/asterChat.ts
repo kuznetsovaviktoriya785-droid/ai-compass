@@ -8,7 +8,7 @@ type AsterChatResponse = {
   error?: string
 }
 
-const CONTEXT_LIMIT = 12
+const CONTEXT_LIMIT = 6
 
 export async function sendAsterChat(
   messages: AsterChatMessage[],

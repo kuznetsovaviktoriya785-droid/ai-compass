@@ -4284,7 +4284,7 @@ mask-composite: exclude;
 }
 
 .aster-root .aster-fab,
-.aster-root .aster-panel {
+.aster-root .aster-panel--open {
   pointer-events: auto;
 }
 
@@ -4463,6 +4463,40 @@ mask-composite: exclude;
 
 .aster-panel-message--assistant {
   color: rgba(236, 232, 224, 0.88);
+  white-space: normal;
+}
+
+.aster-panel-message--assistant > * {
+  margin: 0 0 0.4em;
+}
+
+.aster-panel-message--assistant > *:last-child {
+  margin-bottom: 0;
+}
+
+.aster-panel-message--assistant h1,
+.aster-panel-message--assistant h2,
+.aster-panel-message--assistant h3,
+.aster-panel-message--assistant h4,
+.aster-panel-message--assistant h5,
+.aster-panel-message--assistant h6 {
+  font-size: inherit;
+  font-weight: 600;
+  line-height: inherit;
+  color: inherit;
+}
+
+.aster-panel-message--assistant ul,
+.aster-panel-message--assistant ol {
+  padding-left: 1.15em;
+}
+
+.aster-panel-message--assistant li {
+  margin: 0.12em 0;
+}
+
+.aster-panel-message--assistant li > p {
+  margin: 0;
 }
 
 .aster-panel-message--status {
