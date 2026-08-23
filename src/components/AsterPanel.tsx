@@ -1,7 +1,11 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import Markdown from 'react-markdown'
 import remarkBreaks from 'remark-breaks'
-import { sendAsterChat, type AsterChatMessage } from '../lib/asterChat'
+import {
+  ASTER_MAX_MESSAGE_LENGTH,
+  sendAsterChat,
+  type AsterChatMessage,
+} from '../lib/asterChat'
 
 const QUICK_ACTIONS = [
   'С чего начать?',
@@ -22,6 +26,8 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const threadRef = useRef<HTMLDivElement>(null)
+  const requestLockRef = useRef(false)
+  const activeRequestControllerRef = useRef<AbortController | null>(null)
   const hasUserMessage = messages.some((message) => message.role === 'user')
 
   useEffect(() => {
@@ -34,7 +40,17 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
     node.scrollTop = node.scrollHeight
   }, [messages, loading, error])
 
+  useEffect(
+    () => () => {
+      activeRequestControllerRef.current?.abort()
+      activeRequestControllerRef.current = null
+      requestLockRef.current = false
+    },
+    [],
+  )
+
   const resetConversation = () => {
+    if (requestLockRef.current) return
     setDraft('')
     setMessages([])
     setError(null)
@@ -43,7 +59,11 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
 
   const sendMessage = async (text: string) => {
     const content = text.trim()
-    if (!content || loading) return
+    if (!content || requestLockRef.current) return
+
+    requestLockRef.current = true
+    const controller = new AbortController()
+    activeRequestControllerRef.current = controller
 
     const nextMessages: AsterChatMessage[] = [
       ...messages,
@@ -56,13 +76,17 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
     setLoading(true)
 
     try {
-      const reply = await sendAsterChat(nextMessages)
+      const reply = await sendAsterChat(nextMessages, controller.signal)
       setMessages((current) => [...current, { role: 'assistant', content: reply }])
     } catch (err) {
       const message =
         err instanceof Error ? err.message : 'Не удалось получить ответ от Aster.'
       setError(message)
     } finally {
+      requestLockRef.current = false
+      if (activeRequestControllerRef.current === controller) {
+        activeRequestControllerRef.current = null
+      }
       setLoading(false)
     }
   }
@@ -133,6 +157,7 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
             type="button"
             className="aster-panel-icon-btn"
             aria-label="Новый разговор"
+            disabled={loading}
             onClick={resetConversation}
           >
             <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
@@ -246,6 +271,7 @@ export default function AsterPanel({ open, onClose }: AsterPanelProps) {
           placeholder="Напишите сообщение…"
           aria-label="Сообщение для Aster"
           autoComplete="off"
+          maxLength={ASTER_MAX_MESSAGE_LENGTH}
           value={draft}
           disabled={loading}
           onChange={(event) => setDraft(event.target.value)}
