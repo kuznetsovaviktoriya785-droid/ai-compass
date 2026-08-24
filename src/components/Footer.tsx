@@ -30,6 +30,26 @@ export default function Footer() {
             © {new Date().getFullYear()} AI Compass
           </p>
         </div>
+
+        <div className="mt-8 border-t border-white/10 pt-8 text-center">
+          <p className="text-sm font-medium text-text-primary">Связаться со мной</p>
+          <div className="mt-3 flex flex-col items-center justify-center gap-2 text-sm text-text-secondary sm:flex-row sm:gap-6">
+            <a
+              href="https://t.me/Victoriya_osobennaya"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-brand-gold focus-visible:text-brand-gold"
+            >
+              Telegram: @Victoriya_osobennaya
+            </a>
+            <a
+              href="mailto:V_lapochka@mail.ru"
+              className="transition-colors hover:text-brand-gold focus-visible:text-brand-gold"
+            >
+              Email: V_lapochka@mail.ru
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   )
