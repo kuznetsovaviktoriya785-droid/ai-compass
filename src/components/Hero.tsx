@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import HeroCompass from './HeroCompass'
 import HeroStarfield from './HeroStarfield'
 
@@ -77,97 +76,6 @@ const TWINKLES: TwinkleStar[] = [
   { id: 17, left: 44, top: 16, size: 1.5, duration: 8.9, delay: 6.8, tone: 'champagne' },
 ]
 
-function HeroCursorTrail() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-    if (prefersReduced) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    let width = 0
-    let height = 0
-    let raf = 0
-    const points: { x: number; y: number; born: number }[] = []
-    const TRAIL_LIFE = 800
-
-    const resize = () => {
-      width = window.innerWidth
-      height = window.innerHeight
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      canvas.width = width * dpr
-      canvas.height = height * dpr
-      canvas.style.width = `${width}px`
-      canvas.style.height = `${height}px`
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-    }
-
-    const onMove = (event: MouseEvent) => {
-      points.push({
-        x: event.clientX,
-        y: event.clientY,
-        born: performance.now(),
-      })
-      if (points.length > 40) points.shift()
-    }
-
-    const draw = (now: number) => {
-      ctx.clearRect(0, 0, width, height)
-
-      while (points.length && now - points[0].born > TRAIL_LIFE) {
-        points.shift()
-      }
-
-      if (points.length > 1) {
-        ctx.lineCap = 'round'
-        ctx.lineJoin = 'round'
-        ctx.lineWidth = 1
-
-        for (let i = 1; i < points.length; i++) {
-          const prev = points[i - 1]
-          const curr = points[i]
-          const age = (now - curr.born) / TRAIL_LIFE
-          const alpha = Math.max(0, (1 - age) * 0.18)
-
-          ctx.strokeStyle = `rgba(232, 197, 106, ${alpha})`
-          ctx.beginPath()
-          ctx.moveTo(prev.x, prev.y)
-          ctx.lineTo(curr.x, curr.y)
-          ctx.stroke()
-        }
-      }
-
-      raf = requestAnimationFrame(draw)
-    }
-
-    resize()
-    window.addEventListener('resize', resize)
-    window.addEventListener('mousemove', onMove, { passive: true })
-    raf = requestAnimationFrame(draw)
-
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-      window.removeEventListener('mousemove', onMove)
-    }
-  }, [])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="hero-scene-cursor pointer-events-none absolute inset-0 z-[5]"
-      aria-hidden="true"
-    />
-  )
-}
-
 export default function Hero() {
   return (
     <section className="hero-scene hero-scene--awaken relative">
@@ -175,8 +83,6 @@ export default function Hero() {
         className="hero-scene-curtain pointer-events-none fixed inset-0 z-[100]"
         aria-hidden="true"
       />
-      <HeroCursorTrail />
-
       <div
         className="hero-scene-vignette pointer-events-none absolute inset-0"
         aria-hidden="true"

@@ -2013,9 +2013,6 @@ mask-composite: exclude;
     opacity: 0.7 !important;
   }
 
-  .hero-scene-cursor {
-    display: none;
-  }
 }
 
 /* ===== Journey Map — cosmic route inside the shared universe ===== */
@@ -4659,3 +4656,1818 @@ mask-composite: exclude;
   }
 }
 
+/* ===== Exam Showcase — a quiet gallery of completed work ===== */
+
+.exam-showcase {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding: clamp(5rem, 10vw, 8.5rem) 0 clamp(5.5rem, 11vw, 9.25rem);
+  background: transparent;
+}
+
+.exam-showcase-atmosphere {
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0.66;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+
+.exam-showcase-atmosphere .journey-starfield {
+  opacity: 0.68;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.exam-showcase-haze {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 54% 42% at 14% 30%, rgba(22, 38, 70, 0.18), transparent 72%),
+    radial-gradient(ellipse 46% 40% at 88% 68%, rgba(230, 210, 162, 0.055), transparent 72%),
+    radial-gradient(ellipse 64% 46% at 52% 96%, rgba(9, 18, 36, 0.36), transparent 76%);
+  filter: blur(42px);
+}
+
+.exam-showcase-dust {
+  position: absolute;
+  inset: 0;
+  opacity: 0.38;
+  background-image:
+    radial-gradient(1px 1px at 14% 26%, rgba(255, 255, 255, 0.32), transparent),
+    radial-gradient(1px 1px at 74% 18%, rgba(230, 210, 162, 0.28), transparent),
+    radial-gradient(1px 1px at 88% 72%, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 32% 84%, rgba(247, 233, 187, 0.18), transparent);
+  background-size: 220px 220px, 290px 290px, 380px 380px, 470px 470px;
+}
+
+.exam-showcase-dust::before,
+.exam-showcase-dust::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.exam-showcase-dust::before {
+  opacity: 0.32;
+  background-image:
+    radial-gradient(0.7px 0.7px at 22% 18%, rgba(255, 255, 255, 0.44), transparent),
+    radial-gradient(0.8px 0.8px at 68% 34%, rgba(247, 233, 187, 0.34), transparent),
+    radial-gradient(0.7px 0.7px at 42% 76%, rgba(236, 232, 224, 0.34), transparent),
+    radial-gradient(0.9px 0.9px at 91% 58%, rgba(230, 210, 162, 0.3), transparent);
+  background-size: 170px 170px, 230px 230px, 310px 310px, 410px 410px;
+  background-position: 17px 31px, 83px 47px, 39px 109px, 131px 73px;
+  animation: exam-showcase-stars-far 20s ease-in-out infinite alternate;
+}
+
+.exam-showcase-dust::after {
+  opacity: 0.28;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 248, 235, 0.5), transparent 70%),
+    radial-gradient(1.25px 1.25px at 78% 16%, rgba(247, 233, 187, 0.46), transparent 70%),
+    radial-gradient(1.7px 1.7px at 92% 76%, rgba(255, 255, 255, 0.42), transparent 70%);
+  background-size: 620px 620px, 760px 760px, 880px 880px;
+  background-position: 41px 19px, 173px 97px, 89px 211px;
+  animation: exam-showcase-stars-near 14s ease-in-out infinite alternate;
+}
+
+@keyframes exam-showcase-stars-far {
+  from { opacity: 0.24; }
+  to { opacity: 0.38; }
+}
+
+@keyframes exam-showcase-stars-near {
+  from { opacity: 0.2; }
+  to { opacity: 0.34; }
+}
+
+.exam-showcase-stage {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.exam-showcase--visible .exam-showcase-stage {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exam-showcase-heading {
+  max-width: 45rem;
+  margin: 0 auto clamp(2.25rem, 5vw, 3.75rem);
+  text-align: center;
+}
+
+.exam-showcase-eyebrow {
+  margin: 0 0 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: rgba(230, 210, 162, 0.82);
+  text-shadow: 0 0 18px rgba(230, 210, 162, 0.16);
+}
+
+.exam-showcase-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4.25vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: #f7f4ee;
+  text-wrap: balance;
+  text-shadow: 0 0 28px rgba(247, 233, 187, 0.08);
+}
+
+.exam-showcase-heading h2 span {
+  color: #e6d2a2;
+  text-shadow: 0 0 22px rgba(230, 210, 162, 0.16);
+}
+
+.exam-showcase-subtitle {
+  max-width: 38rem;
+  margin: 1.25rem auto 0;
+  font-size: clamp(0.98rem, 1.3vw, 1.08rem);
+  line-height: 1.7;
+  color: rgba(236, 230, 220, 0.67);
+  text-wrap: pretty;
+}
+
+.exam-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.85rem, 1.6vw, 1.25rem);
+}
+
+.exam-card-wrap {
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.exam-showcase--visible .exam-card-wrap {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exam-showcase--visible .exam-card-wrap:nth-child(2) { transition-delay: 80ms; }
+.exam-showcase--visible .exam-card-wrap:nth-child(3) { transition-delay: 160ms; }
+.exam-showcase--visible .exam-card-wrap:nth-child(4) { transition-delay: 240ms; }
+.exam-showcase--visible .exam-card-wrap:nth-child(5) { transition-delay: 320ms; }
+.exam-showcase--visible .exam-card-wrap:nth-child(6) { transition-delay: 400ms; }
+
+.exam-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 15.5rem;
+  height: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: clamp(1.1rem, 1.6vw, 1.35rem);
+  border: 1px solid rgba(230, 210, 162, 0.17);
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07) 0%, transparent 40%),
+    linear-gradient(180deg, rgba(18, 29, 54, 0.58), rgba(8, 14, 29, 0.7));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.015),
+    0 18px 42px rgba(0, 0, 0, 0.2),
+    0 0 28px rgba(230, 210, 162, 0.035);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  backdrop-filter: blur(22px) saturate(1.1);
+  -webkit-backdrop-filter: blur(22px) saturate(1.1);
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.exam-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 72% 54% at 12% 0%, rgba(230, 210, 162, 0.1), transparent 68%),
+    linear-gradient(116deg, transparent 20%, rgba(255, 255, 255, 0.04) 48%, transparent 72%);
+  opacity: 0.68;
+  transition: opacity 0.35s ease;
+}
+
+.exam-card::after {
+  content: "";
+  position: absolute;
+  right: -2.5rem;
+  bottom: -3rem;
+  width: 9rem;
+  height: 9rem;
+  border: 1px solid rgba(230, 210, 162, 0.11);
+  border-radius: 50%;
+  box-shadow: 0 0 36px rgba(230, 210, 162, 0.05);
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.exam-card:hover {
+  border-color: rgba(230, 210, 162, 0.36);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09) 0%, transparent 42%),
+    linear-gradient(180deg, rgba(22, 35, 63, 0.68), rgba(8, 15, 31, 0.78));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 22px 48px rgba(0, 0, 0, 0.25),
+    0 0 34px rgba(230, 210, 162, 0.09);
+  transform: translateY(-4px);
+}
+
+.exam-card:hover::before { opacity: 1; }
+.exam-card:hover::after { transform: scale(1.08); }
+
+.exam-card:focus-visible {
+  outline: 2px solid rgba(247, 233, 187, 0.78);
+  outline-offset: 4px;
+  border-color: rgba(247, 233, 187, 0.54);
+}
+
+.exam-card-topline,
+.exam-card-copy,
+.exam-card-action {
+  position: relative;
+  z-index: 1;
+}
+
+.exam-card-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.exam-card-number {
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(230, 210, 162, 0.82);
+}
+
+.exam-card-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  border: 1px solid rgba(230, 210, 162, 0.2);
+  border-radius: 0.85rem;
+  background: rgba(230, 210, 162, 0.055);
+  color: #f1dfb6;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.exam-card-mark svg {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.exam-card-copy { margin-top: auto; padding-top: 1.4rem; }
+
+.exam-card-title {
+  display: block;
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f7f4ee;
+}
+
+.exam-card-description {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(236, 230, 220, 0.64);
+}
+
+.exam-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+  margin-top: 0.95rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(230, 210, 162, 0.9);
+}
+
+.exam-card-action svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.exam-card:hover .exam-card-action svg { transform: translateX(3px); }
+
+.exam-dialog-backdrop {
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background: rgba(2, 5, 13, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: exam-backdrop-in 0.24s ease-out both;
+}
+
+html:has(.exam-dialog-backdrop) {
+  overflow-x: clip;
+}
+
+.exam-dialog {
+  display: flex;
+  width: min(100%, 48rem);
+  max-height: min(46rem, calc(100dvh - 5rem));
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(230, 210, 162, 0.28);
+  border-radius: 1.3rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), transparent 38%),
+    linear-gradient(180deg, rgba(20, 31, 56, 0.88), rgba(6, 11, 24, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 44px rgba(230, 210, 162, 0.1),
+    0 28px 80px rgba(0, 0, 0, 0.5);
+  color: #f7f4ee;
+  backdrop-filter: blur(28px) saturate(1.1);
+  -webkit-backdrop-filter: blur(28px) saturate(1.1);
+  animation: exam-dialog-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.exam-dialog-header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem clamp(1.2rem, 3vw, 1.75rem) 1rem;
+  border-bottom: 1px solid rgba(230, 210, 162, 0.12);
+}
+
+.exam-dialog-number,
+.exam-dialog-header p {
+  display: block;
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: rgba(230, 210, 162, 0.78);
+}
+
+.exam-dialog-header p {
+  margin-top: 0.35rem;
+  font-size: 0.63rem;
+  color: rgba(236, 230, 220, 0.48);
+}
+
+.exam-dialog-close {
+  display: inline-flex;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(230, 210, 162, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(247, 233, 187, 0.9);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.exam-dialog-close svg { width: 1.05rem; height: 1.05rem; }
+.exam-dialog-close:hover { border-color: rgba(230, 210, 162, 0.45); background: rgba(230, 210, 162, 0.09); transform: rotate(4deg); }
+.exam-dialog-close:focus-visible { outline: 2px solid rgba(247, 233, 187, 0.78); outline-offset: 3px; }
+
+.exam-dialog-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1.3rem, 3vw, 2rem);
+  scrollbar-color: rgba(230, 210, 162, 0.38) transparent;
+}
+
+.exam-dialog-scroll::-webkit-scrollbar { width: 0.6rem; }
+.exam-dialog-scroll::-webkit-scrollbar-thumb { border: 0.2rem solid transparent; border-radius: 999px; background: rgba(230, 210, 162, 0.34); background-clip: padding-box; }
+
+.exam-dialog-title-block {
+  padding-bottom: 1.35rem;
+  border-bottom: 1px solid rgba(230, 210, 162, 0.1);
+}
+
+.exam-dialog-title-block h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.35rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #f7f4ee;
+}
+
+.exam-dialog-title-block p,
+.exam-dialog-lead {
+  margin: 0.65rem 0 0;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: rgba(236, 230, 220, 0.67);
+}
+
+.exam-dialog-stack { display: grid; gap: 1.25rem; padding-top: 1.35rem; }
+.exam-dialog-lead { margin: 0; max-width: 42rem; }
+
+.exam-aster-content {
+  gap: 1rem;
+}
+
+.exam-aster-section {
+  padding: 1rem;
+  border: 1px solid rgba(230, 210, 162, 0.14);
+  border-radius: 0.95rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 62%),
+    rgba(8, 15, 30, 0.42);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.exam-aster-section h3 {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(230, 210, 162, 0.88);
+}
+
+.exam-aster-section > p {
+  margin: 0.65rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(236, 230, 220, 0.68);
+}
+
+.exam-aster-capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exam-aster-capabilities li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 0.72rem;
+  border: 1px solid rgba(230, 210, 162, 0.11);
+  border-radius: 0.7rem;
+  background: rgba(230, 210, 162, 0.035);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: rgba(247, 244, 238, 0.86);
+}
+
+.exam-aster-capabilities li span {
+  flex: 0 0 auto;
+  font-size: 0.62rem;
+  color: rgba(230, 210, 162, 0.76);
+}
+
+.exam-aster-dialogues {
+  display: grid;
+  gap: 0.72rem;
+  margin-top: 0.75rem;
+}
+
+.exam-aster-dialogue {
+  overflow: hidden;
+  border: 1px solid rgba(230, 210, 162, 0.1);
+  border-radius: 0.8rem;
+  background: rgba(3, 8, 18, 0.28);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.exam-aster-dialogue[data-open="true"] {
+  border-color: rgba(230, 210, 162, 0.18);
+  background: rgba(6, 12, 25, 0.42);
+}
+
+.exam-aster-dialogue-trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.72rem 0.78rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.exam-aster-dialogue-trigger:hover {
+  background: rgba(230, 210, 162, 0.035);
+}
+
+.exam-aster-dialogue-trigger:focus-visible {
+  outline: 2px solid rgba(247, 233, 187, 0.68);
+  outline-offset: -3px;
+}
+
+.exam-aster-dialogue-number {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(230, 210, 162, 0.72);
+}
+
+.exam-aster-dialogue-indicator {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  color: rgba(230, 210, 162, 0.72);
+  transition: transform 0.28s ease;
+}
+
+.exam-aster-dialogue[data-open="true"] .exam-aster-dialogue-indicator {
+  transform: rotate(180deg);
+}
+
+.exam-aster-dialogue-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease;
+}
+
+.exam-aster-dialogue[data-open="true"] .exam-aster-dialogue-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.exam-aster-dialogue-body {
+  display: grid;
+  min-height: 0;
+  gap: 0.48rem;
+  overflow: hidden;
+  padding: 0 0.75rem;
+}
+
+.exam-aster-dialogue[data-open="true"] .exam-aster-dialogue-body {
+  padding-bottom: 0.75rem;
+}
+
+.exam-aster-message {
+  width: min(88%, 34rem);
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.72rem;
+}
+
+.exam-aster-message > span {
+  display: block;
+  margin-bottom: 0.28rem;
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.exam-aster-message p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.exam-aster-message-user {
+  justify-self: end;
+  border: 1px solid rgba(230, 210, 162, 0.15);
+  border-bottom-right-radius: 0.2rem;
+  background: rgba(230, 210, 162, 0.075);
+  color: rgba(247, 244, 238, 0.84);
+}
+
+.exam-aster-message-user > span {
+  color: rgba(230, 210, 162, 0.72);
+}
+
+.exam-aster-message-assistant {
+  justify-self: start;
+  border: 1px solid rgba(120, 142, 178, 0.16);
+  border-bottom-left-radius: 0.2rem;
+  background: rgba(18, 29, 54, 0.58);
+  color: rgba(236, 230, 220, 0.74);
+}
+
+.exam-aster-message-assistant > span {
+  color: rgba(247, 233, 187, 0.82);
+}
+
+.exam-aster-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.62rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exam-aster-flow li {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 3.7rem;
+  place-items: center;
+  padding: 0.55rem;
+  border: 1px solid rgba(230, 210, 162, 0.13);
+  border-radius: 0.68rem;
+  background: rgba(230, 210, 162, 0.04);
+  font-size: 0.7rem;
+  line-height: 1.3;
+  text-align: center;
+  color: rgba(247, 244, 238, 0.78);
+}
+
+.exam-aster-flow li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -0.52rem;
+  z-index: 1;
+  color: rgba(230, 210, 162, 0.58);
+  transform: translate(50%, -50%);
+}
+
+.exam-aster-technical-note {
+  max-width: 42rem;
+}
+
+.exam-aster-live-note {
+  display: flex;
+  align-items: center;
+  gap: 0.62rem;
+  margin: 0;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid rgba(230, 210, 162, 0.16);
+  border-radius: 0.78rem;
+  background: rgba(230, 210, 162, 0.055);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(247, 233, 187, 0.8);
+}
+
+.exam-aster-live-note span {
+  flex: 0 0 auto;
+  color: #e6d2a2;
+}
+
+.exam-dialogue-grid,
+.exam-marketing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+
+.exam-dialogue-placeholder,
+.exam-marketing-item,
+.exam-image-placeholder,
+.exam-track-placeholder,
+.exam-website-preview,
+.exam-automation-step {
+  border: 1px solid rgba(230, 210, 162, 0.14);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 60%), rgba(8, 15, 30, 0.44);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.exam-dialogue-placeholder,
+.exam-marketing-item { min-height: 7.25rem; padding: 1rem; border-radius: 0.85rem; }
+.exam-dialogue-placeholder span,
+.exam-marketing-item span,
+.exam-placeholder-label { font-size: 0.67rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(230, 210, 162, 0.78); }
+.exam-dialogue-placeholder p,
+.exam-marketing-item p { margin: 0.55rem 0 0; font-size: 0.86rem; line-height: 1.5; color: rgba(236, 230, 220, 0.68); }
+
+.exam-marketing-content { gap: 1.1rem; }
+
+.exam-marketing-offer,
+.exam-marketing-section {
+  border: 1px solid rgba(230, 210, 162, 0.17);
+  border-radius: 0.95rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 62%), rgba(8, 15, 30, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.exam-marketing-offer {
+  position: relative;
+  overflow: hidden;
+  padding: 1.35rem;
+  background: radial-gradient(circle at 88% 10%, rgba(230, 210, 162, 0.12), transparent 36%), linear-gradient(145deg, rgba(230, 210, 162, 0.075), transparent 58%), rgba(8, 15, 30, 0.58);
+}
+
+.exam-marketing-offer::after {
+  position: absolute;
+  top: 1rem;
+  right: 1.15rem;
+  color: rgba(230, 210, 162, 0.2);
+  content: '✦';
+  font-size: 2.4rem;
+  text-shadow: 0 0 1.25rem rgba(230, 210, 162, 0.2);
+}
+
+.exam-marketing-offer h3 {
+  max-width: 35rem;
+  margin: 0.6rem 2rem 0;
+  margin-left: 0;
+  color: #f7f4ee;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.55rem, 3.4vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.exam-marketing-offer > p:not(.exam-marketing-offer-note) {
+  max-width: 38rem;
+  margin: 0.9rem 0 0;
+  color: rgba(236, 230, 220, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.exam-marketing-offer-note {
+  margin: 1rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(230, 210, 162, 0.18);
+  color: #e6d2a2;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.exam-marketing-section { padding: 1.05rem; }
+.exam-marketing-section-heading { margin-bottom: 0.8rem; }
+.exam-marketing-section-heading h3 { margin: 0.35rem 0 0; color: #f7f4ee; font-family: "Cormorant Garamond", serif; font-size: 1.35rem; font-weight: 500; }
+.exam-marketing-posts { display: grid; gap: 0.55rem; }
+
+.exam-marketing-post {
+  overflow: hidden;
+  border: 1px solid rgba(230, 210, 162, 0.14);
+  border-radius: 0.75rem;
+  background: rgba(5, 11, 25, 0.36);
+}
+
+.exam-marketing-post.is-open { border-color: rgba(230, 210, 162, 0.28); }
+
+.exam-marketing-post-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 3.15rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 0;
+  color: rgba(247, 244, 238, 0.88);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.exam-marketing-post-trigger span { display: flex; align-items: center; gap: 0.7rem; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.03em; }
+.exam-marketing-post-trigger b { color: rgba(230, 210, 162, 0.72); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.12em; }
+.exam-marketing-post-trigger svg { width: 1rem; height: 1rem; flex: 0 0 auto; color: #e6d2a2; transition: transform 180ms ease; }
+.exam-marketing-post.is-open .exam-marketing-post-trigger svg { transform: rotate(180deg); }
+.exam-marketing-post-trigger:hover { background: rgba(230, 210, 162, 0.04); }
+.exam-marketing-post-trigger:focus-visible { outline: 2px solid rgba(230, 210, 162, 0.72); outline-offset: -3px; }
+
+.exam-marketing-post-panel {
+  padding: 0 0.95rem 1rem;
+  border-top: 1px solid rgba(230, 210, 162, 0.1);
+}
+
+.exam-marketing-post-panel h4 { margin: 0.95rem 0 0; color: #e6d2a2; font-size: 1rem; font-weight: 600; }
+.exam-marketing-post-panel p { margin: 0.65rem 0 0; color: rgba(236, 230, 220, 0.72); font-size: 0.84rem; line-height: 1.58; }
+
+.exam-marketing-reels {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exam-marketing-reels li {
+  position: relative;
+  min-height: 7.5rem;
+  padding: 0.78rem;
+  border: 1px solid rgba(230, 210, 162, 0.13);
+  border-radius: 0.72rem;
+  background: rgba(5, 11, 25, 0.34);
+}
+
+.exam-marketing-reels li:not(:last-child)::after {
+  position: absolute;
+  top: 1.1rem;
+  right: -0.42rem;
+  z-index: 1;
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 50%;
+  background: #e6d2a2;
+  box-shadow: 0 0 0.55rem rgba(230, 210, 162, 0.42);
+  content: '';
+}
+
+.exam-marketing-reels li > span { color: rgba(230, 210, 162, 0.8); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.exam-marketing-reels li p { margin: 0.65rem 0 0; color: rgba(247, 244, 238, 0.82); font-size: 0.76rem; line-height: 1.45; white-space: pre-line; }
+.exam-marketing-reels-final { margin: 0.85rem 0 0; padding: 0.85rem 1rem; border-left: 2px solid rgba(230, 210, 162, 0.58); color: #e6d2a2; background: rgba(230, 210, 162, 0.045); font-family: "Cormorant Garamond", serif; font-size: 1.05rem; line-height: 1.35; }
+
+.exam-marketing-presentation {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exam-marketing-presentation li { display: flex; min-width: 0; align-items: flex-start; gap: 0.65rem; padding: 0.72rem; border: 1px solid rgba(230, 210, 162, 0.11); border-radius: 0.7rem; background: rgba(5, 11, 25, 0.3); }
+.exam-marketing-presentation li span { flex: 0 0 auto; color: rgba(230, 210, 162, 0.7); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.1em; }
+.exam-marketing-presentation li p { margin: 0; color: rgba(236, 230, 220, 0.72); font-size: 0.8rem; line-height: 1.4; }
+
+.exam-marketing-pdf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem;
+  border: 1px solid rgba(230, 210, 162, 0.2);
+  border-radius: 0.95rem;
+  background: linear-gradient(135deg, rgba(230, 210, 162, 0.07), transparent 55%), rgba(8, 15, 30, 0.54);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.exam-marketing-pdf > div { min-width: 0; }
+.exam-marketing-pdf h3 { margin: 0.38rem 0 0; color: #f7f4ee; font-family: "Cormorant Garamond", serif; font-size: 1.3rem; font-weight: 500; line-height: 1.2; }
+.exam-marketing-pdf p { margin: 0.45rem 0 0; color: rgba(236, 230, 220, 0.64); font-size: 0.8rem; line-height: 1.45; }
+
+.exam-marketing-pdf-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(230, 210, 162, 0.42);
+  border-radius: 999px;
+  color: #e6d2a2;
+  background: rgba(230, 210, 162, 0.06);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.exam-marketing-pdf-link svg { width: 0.95rem; height: 0.95rem; flex: 0 0 auto; }
+.exam-marketing-pdf-link:hover { border-color: rgba(230, 210, 162, 0.78); background: rgba(230, 210, 162, 0.11); transform: translateY(-1px); }
+.exam-marketing-pdf-link:focus-visible { outline: 2px solid rgba(230, 210, 162, 0.8); outline-offset: 3px; }
+
+.exam-marketing-pdf-viewer {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  display: flex;
+  padding: 0.7rem;
+  background: rgba(2, 7, 19, 0.96);
+  animation: exam-backdrop-in 180ms ease-out both;
+}
+
+.exam-marketing-pdf-viewer-panel {
+  display: flex;
+  width: 100%;
+  height: calc(100dvh - 1.4rem);
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(230, 210, 162, 0.2);
+  border-radius: 0.8rem;
+  background: #050b19;
+}
+
+.exam-marketing-pdf-viewer-bar {
+  display: flex;
+  min-height: 3.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0.8rem 0.65rem 1rem;
+  border-bottom: 1px solid rgba(230, 210, 162, 0.16);
+  background: linear-gradient(90deg, rgba(230, 210, 162, 0.055), transparent 45%), rgba(7, 14, 30, 0.98);
+}
+
+.exam-marketing-pdf-viewer-bar h2 {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #f7f4ee;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.exam-marketing-pdf-viewer-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 0.5rem; }
+
+.exam-marketing-pdf-viewer-actions button {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.58rem 0.85rem;
+  border: 1px solid rgba(230, 210, 162, 0.34);
+  border-radius: 999px;
+  color: #e6d2a2;
+  background: rgba(230, 210, 162, 0.055);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.exam-marketing-pdf-viewer-actions button:hover { border-color: rgba(230, 210, 162, 0.76); background: rgba(230, 210, 162, 0.11); }
+.exam-marketing-pdf-viewer-actions button:focus-visible { outline: 2px solid rgba(230, 210, 162, 0.82); outline-offset: 2px; }
+.exam-marketing-pdf-viewer-actions .exam-marketing-pdf-viewer-close { width: 2.5rem; padding: 0; }
+.exam-marketing-pdf-viewer-close svg { width: 1rem; height: 1rem; }
+
+.exam-marketing-pdf-viewer iframe {
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  border: 0;
+  background: #050b19;
+}
+
+.exam-images-content {
+  gap: 1rem;
+}
+
+.exam-images-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 0.8rem;
+}
+
+.exam-images-work {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(230, 210, 162, 0.14);
+  border-radius: 0.9rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 60%),
+    rgba(8, 15, 30, 0.46);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.exam-images-work-preview {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+.exam-images-work-preview:focus-visible {
+  outline: 2px solid rgba(247, 233, 187, 0.72);
+  outline-offset: -3px;
+}
+
+.exam-images-work-visual,
+.exam-image-lightbox-visual {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(230, 210, 162, 0.13), transparent 12%),
+    radial-gradient(ellipse 58% 48% at 50% 52%, rgba(24, 41, 72, 0.55), transparent 72%),
+    linear-gradient(160deg, rgba(15, 27, 50, 0.92), rgba(4, 9, 20, 0.98));
+}
+
+.exam-images-work-visual {
+  aspect-ratio: 4 / 3;
+  border-bottom: 1px solid rgba(230, 210, 162, 0.1);
+}
+
+.exam-images-work-visual img,
+.exam-image-lightbox-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.375rem;
+  object-fit: contain;
+}
+
+.exam-images-placeholder-orbit {
+  position: absolute;
+  width: 44%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(230, 210, 162, 0.14);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1.1rem rgba(230, 210, 162, 0.018),
+    0 0 0 2.4rem rgba(230, 210, 162, 0.012);
+  transform: rotate(-18deg) scaleY(0.58);
+}
+
+.exam-images-placeholder-star {
+  position: relative;
+  z-index: 1;
+  color: rgba(247, 233, 187, 0.74);
+  text-shadow: 0 0 14px rgba(230, 210, 162, 0.22);
+}
+
+.exam-images-placeholder-label {
+  position: absolute;
+  right: 0.65rem;
+  bottom: 0.55rem;
+  left: 0.65rem;
+  font-size: 0.57rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(236, 230, 220, 0.38);
+}
+
+.exam-images-work-copy {
+  flex: 1 1 auto;
+  padding: 0.82rem 0.85rem 0.65rem;
+}
+
+.exam-images-work-number {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(230, 210, 162, 0.72);
+}
+
+.exam-images-work-copy h3 {
+  margin: 0.38rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: rgba(247, 244, 238, 0.9);
+}
+
+.exam-images-work-copy p {
+  margin: 0.42rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(236, 230, 220, 0.58);
+}
+
+.exam-images-prompt-trigger {
+  display: flex;
+  width: calc(100% - 1.7rem);
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin: 0 0.85rem 0.75rem;
+  padding: 0.58rem 0.65rem;
+  border: 1px solid rgba(230, 210, 162, 0.13);
+  border-radius: 0.62rem;
+  background: rgba(230, 210, 162, 0.035);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(230, 210, 162, 0.82);
+  cursor: pointer;
+}
+
+.exam-images-prompt-trigger:hover {
+  border-color: rgba(230, 210, 162, 0.26);
+  background: rgba(230, 210, 162, 0.065);
+}
+
+.exam-images-prompt-trigger:focus-visible {
+  outline: 2px solid rgba(247, 233, 187, 0.68);
+  outline-offset: 2px;
+}
+
+.exam-images-prompt-trigger svg {
+  width: 0.92rem;
+  height: 0.92rem;
+  flex: 0 0 auto;
+  transition: transform 0.25s ease;
+}
+
+.exam-images-prompt-trigger[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.exam-images-prompt-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+}
+
+.exam-images-prompt-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.exam-images-prompt-panel p {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 0.85rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(236, 230, 220, 0.58);
+}
+
+.exam-images-prompt-panel[data-open="true"] p {
+  padding-bottom: 0.8rem;
+}
+
+.exam-image-lightbox {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  place-items: center;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  background: rgba(2, 5, 13, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: exam-backdrop-in 0.2s ease-out both;
+}
+
+.exam-image-lightbox-panel {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.exam-image-lightbox-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0 0.55rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.exam-image-lightbox-header span {
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(230, 210, 162, 0.72);
+}
+
+.exam-image-lightbox-header h3 {
+  margin: 0.24rem 0 0;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 600;
+  color: rgba(247, 244, 238, 0.9);
+}
+
+.exam-image-lightbox-close {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(230, 210, 162, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(247, 233, 187, 0.9);
+  cursor: pointer;
+}
+
+.exam-image-lightbox-close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.exam-image-lightbox-close:focus-visible {
+  outline: 2px solid rgba(247, 233, 187, 0.72);
+  outline-offset: 3px;
+}
+
+.exam-image-lightbox-visual {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.exam-image-lightbox-visual img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  object-fit: contain;
+  object-position: center;
+}
+
+.exam-image-lightbox-visual p {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
+  left: 1rem;
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(236, 230, 220, 0.42);
+}
+
+.exam-image-placeholders { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.55rem; }
+.exam-image-placeholder { display: flex; aspect-ratio: 0.76; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 0.7rem; border-radius: 0.75rem; background: linear-gradient(145deg, rgba(230, 210, 162, 0.12), transparent 52%), rgba(8, 15, 30, 0.52); }
+.exam-image-placeholder span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(230, 210, 162, 0.8); }
+.exam-image-placeholder p { margin: 0.35rem 0 0; font-size: 0.7rem; line-height: 1.35; color: rgba(236, 230, 220, 0.58); }
+
+.exam-website-preview { overflow: hidden; border-radius: 0.95rem; }
+.exam-website-bar { display: flex; gap: 0.35rem; padding: 0.7rem 0.8rem; border-bottom: 1px solid rgba(230, 210, 162, 0.1); background: rgba(3, 8, 18, 0.36); }
+.exam-website-bar span { width: 0.43rem; height: 0.43rem; border-radius: 50%; background: rgba(230, 210, 162, 0.46); }
+.exam-website-screen { display: grid; min-height: 13rem; place-content: center; padding: 1.5rem; text-align: center; background: radial-gradient(circle at 50% 42%, rgba(230, 210, 162, 0.13), transparent 36%), linear-gradient(160deg, rgba(21, 35, 65, 0.75), rgba(5, 10, 23, 0.7)); }
+.exam-website-star { font-size: 1.5rem; color: #e6d2a2; text-shadow: 0 0 16px rgba(230, 210, 162, 0.35); }
+.exam-website-screen strong { margin-top: 0.6rem; font-size: 1.15rem; letter-spacing: -0.02em; }
+.exam-website-screen p { max-width: 18rem; margin: 0.45rem 0 0; font-size: 0.82rem; line-height: 1.5; color: rgba(236, 230, 220, 0.64); }
+
+.exam-website-content { gap: 0.9rem; }
+
+.exam-website-intro {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.exam-website-tagline {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(230, 210, 162, 0.9);
+}
+
+.exam-website-section {
+  padding: 1rem;
+  border: 1px solid rgba(230, 210, 162, 0.14);
+  border-radius: 0.9rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 62%),
+    rgba(8, 15, 30, 0.44);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.exam-website-section h3 {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: rgba(247, 244, 238, 0.92);
+}
+
+.exam-website-section > p {
+  margin: 0.55rem 0 0;
+  font-size: 0.84rem;
+  line-height: 1.58;
+  color: rgba(236, 230, 220, 0.65);
+}
+
+.exam-website-capabilities,
+.exam-website-technologies,
+.exam-website-process {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exam-website-capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.exam-website-capabilities li {
+  position: relative;
+  min-width: 0;
+  padding: 0.68rem 0.72rem 0.68rem 1.65rem;
+  border: 1px solid rgba(230, 210, 162, 0.1);
+  border-radius: 0.68rem;
+  background: rgba(230, 210, 162, 0.025);
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: rgba(247, 244, 238, 0.76);
+}
+
+.exam-website-capabilities li::before {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.72rem;
+  content: '✦';
+  font-size: 0.62rem;
+  color: rgba(230, 210, 162, 0.75);
+}
+
+.exam-website-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.exam-website-technologies li {
+  padding: 0.48rem 0.72rem;
+  border: 1px solid rgba(230, 210, 162, 0.16);
+  border-radius: 999px;
+  background: rgba(230, 210, 162, 0.04);
+  font-size: 0.69rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(230, 210, 162, 0.86);
+}
+
+.exam-website-process {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.exam-website-process li {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 4.2rem;
+  place-items: center;
+  padding: 0.55rem 0.42rem;
+  border: 1px solid rgba(230, 210, 162, 0.12);
+  border-radius: 0.68rem;
+  background: rgba(6, 12, 25, 0.48);
+  font-size: 0.67rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+  color: rgba(247, 244, 238, 0.76);
+}
+
+.exam-website-process li:not(:last-child)::after {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: -0.43rem;
+  content: '→';
+  color: rgba(230, 210, 162, 0.66);
+  transform: translate(50%, -50%);
+}
+
+.exam-website-result {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(230, 210, 162, 0.08), transparent 34%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 62%),
+    rgba(8, 15, 30, 0.5);
+}
+
+.exam-track-placeholder { display: flex; align-items: center; gap: 1.1rem; padding: 1.15rem; border-radius: 0.95rem; }
+.exam-track-disc { display: grid; width: 4.5rem; height: 4.5rem; flex: 0 0 auto; place-items: center; border: 1px solid rgba(230, 210, 162, 0.3); border-radius: 50%; background: radial-gradient(circle, rgba(230, 210, 162, 0.24) 0 8%, rgba(7, 13, 27, 0.8) 10% 40%, rgba(230, 210, 162, 0.12) 41% 43%, rgba(7, 13, 27, 0.88) 44%); box-shadow: 0 0 20px rgba(230, 210, 162, 0.1); }
+.exam-track-disc span { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #e6d2a2; }
+.exam-track-placeholder h3 { margin: 0.38rem 0 0; font-size: 1rem; font-weight: 600; color: #f7f4ee; }
+.exam-track-placeholder p { margin: 0.4rem 0 0; font-size: 0.84rem; line-height: 1.5; color: rgba(236, 230, 220, 0.64); }
+
+.exam-track-player {
+  display: grid;
+  grid-template-columns: minmax(6.75rem, 8rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.15rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(230, 210, 162, 0.24);
+  border-radius: 0.95rem;
+  background: linear-gradient(135deg, rgba(230, 210, 162, 0.06), transparent 45%), rgba(9, 17, 39, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.exam-track-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 0.9rem;
+  object-fit: cover;
+}
+
+.exam-track-player-body { min-width: 0; }
+.exam-track-player-body h3 { margin: 0.18rem 0 0; color: #f7f4ee; font-family: "Cormorant Garamond", serif; font-size: clamp(1.2rem, 2vw, 1.55rem); font-weight: 500; }
+.exam-track-player-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.32rem 0 0.95rem; color: rgba(236, 230, 220, 0.64); font-size: 0.77rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.exam-track-player-meta span { color: rgba(230, 210, 162, 0.58); }
+.exam-track-player audio { display: none; }
+
+.exam-track-controls { display: flex; align-items: center; gap: 0.85rem; min-width: 0; }
+
+.exam-track-play-button {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(230, 210, 162, 0.5);
+  border-radius: 50%;
+  color: #e6d2a2;
+  background: rgba(230, 210, 162, 0.08);
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.exam-track-play-button:hover,
+.exam-track-play-button:focus-visible { border-color: rgba(230, 210, 162, 0.82); background: rgba(230, 210, 162, 0.14); transform: translateY(-1px); }
+.exam-track-play-button:focus-visible { outline: 2px solid rgba(230, 210, 162, 0.85); outline-offset: 3px; }
+.exam-track-play-button svg { width: 1rem; height: 1rem; }
+.exam-track-timeline { flex: 1; min-width: 0; }
+
+.exam-track-progress {
+  width: 100%;
+  height: 0.3rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.exam-track-progress::-webkit-slider-thumb { width: 0.85rem; height: 0.85rem; border: 2px solid rgba(7, 13, 31, 0.92); border-radius: 50%; appearance: none; background: #e6d2a2; box-shadow: 0 0 0.55rem rgba(230, 210, 162, 0.38); }
+.exam-track-progress::-moz-range-thumb { width: 0.85rem; height: 0.85rem; border: 2px solid rgba(7, 13, 31, 0.92); border-radius: 50%; background: #e6d2a2; box-shadow: 0 0 0.55rem rgba(230, 210, 162, 0.38); }
+.exam-track-times { display: flex; justify-content: space-between; margin-top: 0.42rem; color: rgba(236, 230, 220, 0.58); font-variant-numeric: tabular-nums; font-size: 0.72rem; }
+
+.exam-automation-content { gap: 0.9rem; }
+#exam-dialog-title-automation + p {
+  color: rgba(247, 233, 196, 0.88);
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+.exam-automation-section {
+  min-width: 0;
+  padding: 1.05rem;
+  border: 1px solid rgba(230, 210, 162, 0.13);
+  border-radius: 0.95rem;
+  background: linear-gradient(145deg, rgba(19, 31, 56, 0.54), rgba(6, 13, 29, 0.62));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+.exam-automation-workflow {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(230, 210, 162, 0.22);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(230, 210, 162, 0.11), transparent 42%),
+    linear-gradient(145deg, rgba(22, 36, 65, 0.62), rgba(5, 12, 27, 0.72));
+}
+.exam-automation-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.55rem; margin-top: 0.8rem; }
+.exam-automation-step {
+  position: relative;
+  display: grid;
+  min-height: 6.5rem;
+  align-content: center;
+  padding: 0.75rem;
+  border-radius: 0.8rem;
+  text-align: center;
+}
+.exam-automation-step span { display: block; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; color: rgba(230, 210, 162, 0.64); }
+.exam-automation-step strong { display: block; margin-top: 0.5rem; font-size: 0.72rem; line-height: 1.35; color: rgba(247, 244, 238, 0.9); }
+.exam-automation-step b { position: absolute; top: 50%; right: -0.48rem; z-index: 1; font-size: 0.85rem; font-weight: 400; color: rgba(230, 210, 162, 0.64); transform: translateY(-50%); }
+.exam-automation-workflow-note,
+.exam-automation-local-note { margin: 0.8rem 0 0; color: rgba(236, 230, 220, 0.68); font-size: 0.8rem; line-height: 1.55; }
+.exam-automation-outputs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.65rem; margin-top: 0.8rem; }
+.exam-automation-output { min-width: 0; padding: 0.9rem; border: 1px solid rgba(230, 210, 162, 0.12); border-radius: 0.8rem; background: rgba(4, 10, 23, 0.34); }
+.exam-automation-output > span { color: rgba(230, 210, 162, 0.58); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; }
+.exam-automation-output h3 { margin: 0.55rem 0 0; color: #f7f4ee; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; }
+.exam-automation-output p { margin: 0.45rem 0 0; color: rgba(236, 230, 220, 0.66); font-size: 0.76rem; line-height: 1.5; }
+.exam-automation-check { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-color: rgba(230, 210, 162, 0.22); }
+.exam-automation-check > div { min-width: 0; }
+.exam-automation-check > div > p:last-child { margin: 0.65rem 0 0; color: rgba(236, 230, 220, 0.68); font-size: 0.8rem; line-height: 1.5; }
+.exam-automation-check > strong { display: grid; flex: 0 0 auto; min-width: 7.5rem; place-items: center; padding: 0.8rem 1rem; border: 1px solid rgba(230, 210, 162, 0.28); border-radius: 0.8rem; color: #e6d2a2; background: rgba(230, 210, 162, 0.055); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; }
+.exam-automation-check > strong span { color: #f7e9c4; font-family: "Cormorant Garamond", serif; font-size: 1.85rem; font-weight: 500; letter-spacing: 0; line-height: 1; }
+.exam-automation-technologies { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0 0; padding: 0; list-style: none; }
+.exam-automation-technologies li { padding: 0.52rem 0.72rem; border: 1px solid rgba(230, 210, 162, 0.2); border-radius: 999px; color: rgba(247, 244, 238, 0.82); background: rgba(230, 210, 162, 0.045); font-size: 0.72rem; line-height: 1; }
+.exam-automation-launch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; margin: 0.8rem 0 0; padding: 0; counter-reset: automation-launch; list-style: none; }
+.exam-automation-launch li { position: relative; min-width: 0; padding: 0.72rem 0.75rem 0.72rem 2.55rem; border: 1px solid rgba(230, 210, 162, 0.1); border-radius: 0.72rem; color: rgba(236, 230, 220, 0.76); background: rgba(4, 10, 23, 0.28); font-size: 0.76rem; line-height: 1.4; counter-increment: automation-launch; }
+.exam-automation-launch li::before { content: counter(automation-launch, decimal-leading-zero); position: absolute; top: 0.72rem; left: 0.75rem; color: rgba(230, 210, 162, 0.66); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; }
+.exam-automation-providers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; margin-top: 0.8rem; }
+.exam-automation-providers p { display: grid; min-width: 0; gap: 0.3rem; margin: 0; padding: 0.8rem; border: 1px solid rgba(230, 210, 162, 0.12); border-radius: 0.78rem; background: rgba(4, 10, 23, 0.3); }
+.exam-automation-providers strong { color: #e6d2a2; font-size: 0.8rem; font-weight: 600; }
+.exam-automation-providers span { color: rgba(236, 230, 220, 0.64); font-size: 0.74rem; line-height: 1.4; }
+.exam-automation-demo { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-color: rgba(230, 210, 162, 0.2); }
+.exam-automation-demo button {
+  min-height: 2.7rem;
+  flex: 0 0 auto;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(230, 210, 162, 0.42);
+  border-radius: 999px;
+  color: #e6d2a2;
+  background: rgba(230, 210, 162, 0.06);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+.exam-automation-demo button:hover { border-color: rgba(230, 210, 162, 0.78); background: rgba(230, 210, 162, 0.11); transform: translateY(-1px); }
+.exam-automation-demo button:focus-visible { outline: 2px solid rgba(230, 210, 162, 0.82); outline-offset: 3px; }
+
+.exam-automation-viewer {
+  position: fixed;
+  z-index: 130;
+  inset: 0;
+  display: flex;
+  padding: 0.7rem;
+  background: rgba(2, 7, 19, 0.97);
+  animation: exam-backdrop-in 180ms ease-out both;
+}
+
+.exam-automation-viewer-panel {
+  display: flex;
+  width: 100%;
+  height: calc(100dvh - 1.4rem);
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(230, 210, 162, 0.2);
+  border-radius: 0.8rem;
+  background: #050b19;
+}
+
+.exam-automation-viewer-bar {
+  display: flex;
+  min-height: 3.75rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0.8rem 0.65rem 1rem;
+  border-bottom: 1px solid rgba(230, 210, 162, 0.16);
+  background: linear-gradient(90deg, rgba(230, 210, 162, 0.055), transparent 45%), rgba(7, 14, 30, 0.98);
+}
+
+.exam-automation-viewer-bar h2 {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #f7f4ee;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.exam-automation-viewer-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 0.5rem; }
+
+.exam-automation-viewer-actions button {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.58rem 0.85rem;
+  border: 1px solid rgba(230, 210, 162, 0.34);
+  border-radius: 999px;
+  color: #e6d2a2;
+  background: rgba(230, 210, 162, 0.055);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.exam-automation-viewer-actions button:hover { border-color: rgba(230, 210, 162, 0.76); background: rgba(230, 210, 162, 0.11); }
+.exam-automation-viewer-actions button:focus-visible { outline: 2px solid rgba(230, 210, 162, 0.82); outline-offset: 2px; }
+.exam-automation-viewer-actions .exam-automation-viewer-close { width: 2.5rem; padding: 0; }
+.exam-automation-viewer-close svg { width: 1rem; height: 1rem; }
+
+.exam-automation-viewer-stage {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  place-items: center;
+  padding: clamp(0.5rem, 1.4vw, 1rem);
+  background: #020713;
+}
+
+.exam-automation-viewer-stage video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0.6rem;
+  background: #020713;
+  object-fit: contain;
+}
+
+@keyframes exam-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes exam-dialog-in { from { opacity: 0; transform: translateY(12px) scale(0.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 1023px) {
+  .exam-showcase-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .exam-card { min-height: 15rem; }
+}
+
+@media (max-width: 639px) {
+  .exam-showcase { padding: 4.75rem 0 5.5rem; }
+  .exam-showcase-heading { margin-bottom: 2rem; text-align: left; }
+  .exam-showcase-subtitle { margin-left: 0; }
+  .exam-showcase-grid { grid-template-columns: minmax(0, 1fr); }
+  .exam-card { min-height: 14.25rem; }
+  .exam-dialog-backdrop { align-items: end; padding: 0; }
+  .exam-dialog { width: 100%; max-height: min(100dvh, 52rem); border-right: 0; border-bottom: 0; border-left: 0; border-radius: 1.25rem 1.25rem 0 0; }
+  .exam-dialog-header { padding-top: max(1rem, env(safe-area-inset-top)); }
+  .exam-dialog-scroll { padding-right: 1.1rem; padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+  .exam-dialogue-grid, .exam-marketing-grid { grid-template-columns: 1fr; }
+  .exam-image-placeholders { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .exam-image-placeholder:last-child { grid-column: span 2; aspect-ratio: 2.1; }
+  .exam-automation-flow { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+  .exam-automation-step { min-height: 4.8rem; padding: 0.7rem; }
+  .exam-automation-step b { top: auto; right: 50%; bottom: -0.6rem; transform: translate(50%, 50%) rotate(90deg); }
+  .exam-automation-outputs,
+  .exam-automation-launch,
+  .exam-automation-providers { grid-template-columns: minmax(0, 1fr); }
+  .exam-automation-check { align-items: stretch; flex-direction: column; }
+  .exam-automation-check > strong { width: 100%; }
+  .exam-automation-demo { align-items: stretch; flex-direction: column; }
+  .exam-automation-demo button { width: 100%; }
+  .exam-automation-viewer { padding: 0; }
+  .exam-automation-viewer-panel { height: 100dvh; border: 0; border-radius: 0; }
+  .exam-automation-viewer-bar { min-height: 3.65rem; gap: 0.45rem; padding: max(0.55rem, env(safe-area-inset-top)) 0.5rem 0.55rem 0.65rem; }
+  .exam-automation-viewer-bar h2 { font-size: 0.9rem; }
+  .exam-automation-viewer-actions { gap: 0.3rem; }
+  .exam-automation-viewer-actions button { min-height: 2.35rem; padding: 0.5rem 0.62rem; font-size: 0.66rem; }
+  .exam-automation-viewer-actions .exam-automation-viewer-close { width: 2.35rem; }
+  .exam-automation-viewer-stage { padding: 0.35rem; }
+  .exam-aster-section { padding: 0.85rem; }
+  .exam-aster-capabilities { grid-template-columns: minmax(0, 1fr); }
+  .exam-aster-message { width: 94%; }
+  .exam-aster-flow { grid-template-columns: minmax(0, 1fr); gap: 1.05rem; }
+  .exam-aster-flow li { min-height: auto; padding: 0.68rem; }
+  .exam-aster-flow li:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -0.55rem;
+    transform: translate(50%, 50%) rotate(90deg);
+  }
+  .exam-images-gallery { grid-template-columns: minmax(0, 1fr); }
+  .exam-images-work-visual { aspect-ratio: 4 / 3; }
+  .exam-images-work-visual img,
+  .exam-image-lightbox-visual img { border-radius: 1rem; }
+  .exam-website-section { padding: 0.85rem; }
+  .exam-website-capabilities { grid-template-columns: minmax(0, 1fr); }
+  .exam-website-process { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+  .exam-website-process li { min-height: auto; padding: 0.7rem; }
+  .exam-website-process li:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -0.57rem;
+    content: '↓';
+    transform: translate(50%, 50%);
+  }
+  .exam-track-player { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; padding: 0.9rem; }
+  .exam-track-cover { width: min(10rem, 58vw); justify-self: center; }
+  .exam-track-player-body { width: 100%; }
+  .exam-track-controls { gap: 0.7rem; }
+  .exam-marketing-offer { padding: 1.05rem; }
+  .exam-marketing-offer::after { top: 0.75rem; right: 0.85rem; font-size: 1.75rem; }
+  .exam-marketing-section { padding: 0.85rem; }
+  .exam-marketing-reels { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+  .exam-marketing-reels li { min-height: auto; padding: 0.75rem; }
+  .exam-marketing-reels li:not(:last-child)::after { top: auto; right: 50%; bottom: -0.4rem; transform: translate(50%, 50%); }
+  .exam-marketing-presentation { grid-template-columns: minmax(0, 1fr); }
+  .exam-marketing-post-trigger { gap: 0.65rem; }
+  .exam-marketing-pdf { align-items: stretch; flex-direction: column; padding: 0.95rem; }
+  .exam-marketing-pdf-link { width: 100%; }
+  .exam-marketing-pdf-viewer { padding: 0; }
+  .exam-marketing-pdf-viewer-panel { height: 100dvh; border: 0; border-radius: 0; }
+  .exam-marketing-pdf-viewer-bar { min-height: 3.65rem; gap: 0.5rem; padding: max(0.55rem, env(safe-area-inset-top)) 0.55rem 0.55rem 0.7rem; }
+  .exam-marketing-pdf-viewer-bar h2 { font-size: 0.9rem; }
+  .exam-marketing-pdf-viewer-actions { gap: 0.35rem; }
+  .exam-marketing-pdf-viewer-actions button { min-height: 2.35rem; padding: 0.5rem 0.65rem; font-size: 0.68rem; }
+  .exam-marketing-pdf-viewer-actions .exam-marketing-pdf-viewer-close { width: 2.35rem; }
+  .exam-image-lightbox { padding: 0.55rem; }
+  .exam-image-lightbox-panel { height: 100%; max-height: none; border-radius: 0; }
+  .exam-image-lightbox-header { padding: 0.15rem 0 0.45rem; }
+  .exam-image-lightbox-visual { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exam-showcase-dust::before,
+  .exam-showcase-dust::after {
+    animation: none !important;
+  }
+
+  .exam-showcase-stage,
+  .exam-card-wrap {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .exam-aster-dialogue,
+  .exam-aster-dialogue-panel,
+  .exam-aster-dialogue-indicator {
+    transition: none !important;
+  }
+
+  .exam-images-prompt-panel,
+  .exam-images-prompt-trigger svg,
+  .exam-image-lightbox,
+  .exam-marketing-post-trigger svg,
+  .exam-marketing-pdf-link,
+  .exam-marketing-pdf-viewer,
+  .exam-marketing-pdf-viewer-actions button,
+  .exam-automation-demo button,
+  .exam-automation-viewer,
+  .exam-automation-viewer-actions button {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .exam-card,
+  .exam-card::before,
+  .exam-card::after,
+  .exam-card-action svg,
+  .exam-dialog-close,
+  .exam-dialog-backdrop,
+  .exam-dialog {
+    animation: none !important;
+    transition: none !important;
+  }
+}
